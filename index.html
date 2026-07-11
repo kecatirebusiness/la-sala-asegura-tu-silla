@@ -63,15 +63,20 @@
   .dep-tag{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);background:var(--green-soft);padding:6px 12px;border-radius:999px}
   .dep-live{font-size:12px;color:var(--muted)} .dep-live b{color:var(--text);font-weight:700}
 
-  .price-row{display:flex;align-items:center;justify-content:center;gap:22px;padding:4px 0 6px}
-  .price-main{display:flex;align-items:center;gap:11px}
-  .deposit .amount{font-size:66px;font-weight:800;letter-spacing:-.045em;line-height:.9;background:linear-gradient(180deg,#eafff1,#9fe9c0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
-  .deposit .amount sup{font-size:26px;font-weight:700;vertical-align:super;-webkit-text-fill-color:var(--core)}
-  .price-cycle{font-size:12.5px;font-weight:600;color:var(--muted);text-align:left;line-height:1.25}
-  .price-anchor{text-align:left;padding-left:22px;border-left:1px solid var(--border);display:flex;flex-direction:column;gap:2px}
-  .pa-from{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
-  .pa-val{font-size:19px;font-weight:700;color:var(--text)}
-  .pa-note{font-size:11.5px;color:var(--green);font-weight:600}
+  .dep-price{text-align:center;padding:2px 0 0}
+  .dep-amount{display:inline-flex;align-items:flex-start;font-size:72px;font-weight:800;letter-spacing:-.045em;line-height:.9;background:linear-gradient(180deg,#eafff1,#9fe9c0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+  .dep-amount sup{font-size:30px;font-weight:700;margin-top:6px;-webkit-text-fill-color:var(--core)}
+  .dep-amount span{font-size:19px;font-weight:600;align-self:flex-end;margin:0 0 13px 8px;color:var(--muted);-webkit-text-fill-color:var(--muted)}
+  .dep-sub{font-size:13px;color:var(--muted);margin-top:4px}
+  .dep-ledger{max-width:330px;margin:18px auto 0;background:rgba(0,0,0,.24);border:1px solid var(--border);border-radius:14px;padding:8px 16px}
+  .lg{display:flex;align-items:center;justify-content:space-between;font-size:13.5px;padding:7px 0}
+  .lg-k{color:var(--muted)}
+  .lg-v{font-weight:700;color:var(--text)}
+  .lg-v.green{color:var(--green)}
+  .lg.total{border-top:1px dashed var(--border);margin-top:1px;padding-top:9px}
+  .lg.total .lg-k{color:var(--text);font-weight:600}
+  .lg.total .lg-v{color:var(--green);font-size:16.5px}
+  .dep-finance{font-size:11.5px;color:var(--muted);margin-top:9px}
 
   .dep-unlocks{display:flex;flex-wrap:wrap;justify-content:center;gap:7px 16px;margin:18px 0 4px}
   .dep-unlocks span{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;color:var(--text)}
@@ -85,23 +90,15 @@
   .seats-fill{position:absolute;inset:0;width:0;border-radius:999px;background:linear-gradient(90deg,var(--green),var(--core));box-shadow:0 0 12px rgba(34,197,94,.6);animation:fill 1.6s cubic-bezier(.22,1,.36,1) .3s forwards}
   @keyframes fill{to{width:54.6%}}
 
-  /* SHAKE BUTTON */
-  .seat-btn{display:inline-flex;align-items:center;justify-content:center;gap:11px;width:100%;max-width:420px;margin:20px auto 0;background:linear-gradient(135deg,var(--green),var(--core));color:#04240f;font-weight:800;font-size:18px;letter-spacing:-.01em;padding:18px 26px;border:none;border-radius:14px;cursor:pointer;text-decoration:none;box-shadow:0 10px 30px -8px rgba(34,197,94,.55);transition:transform .12s,box-shadow .2s;animation:shake 3s ease-in-out infinite;transform-origin:center}
-  .seat-btn:hover{box-shadow:0 14px 42px -8px rgba(34,197,94,.8);animation-play-state:paused;transform:translateY(-2px) scale(1.015)}
+  /* CTA BUTTON */
+  .seat-btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:11px;width:100%;max-width:420px;margin:22px auto 0;background:linear-gradient(135deg,var(--green),var(--core));color:#04240f;font-weight:800;font-size:18px;letter-spacing:-.01em;padding:18px 26px;border:none;border-radius:14px;cursor:pointer;text-decoration:none;box-shadow:0 10px 30px -10px rgba(34,197,94,.55);transition:transform .14s,box-shadow .25s;animation:glowpulse 2.8s ease-in-out infinite}
+  .seat-btn:hover{box-shadow:0 16px 46px -8px rgba(34,197,94,.85);transform:translateY(-2px) scale(1.012)}
   .seat-btn:active{transform:translateY(0) scale(.99)}
-  .seat-btn svg{width:20px;height:20px}
-  @keyframes shake{
-    0%,80%,100%{transform:translateX(0) rotate(0)}
-    82%{transform:translateX(-7px) rotate(-1.3deg)}
-    84%{transform:translateX(7px) rotate(1.3deg)}
-    86%{transform:translateX(-6px) rotate(-1deg)}
-    88%{transform:translateX(6px) rotate(1deg)}
-    90%{transform:translateX(-4px) rotate(-.6deg)}
-    92%{transform:translateX(4px) rotate(.6deg)}
-    94%{transform:translateX(-2px)}
-    96%{transform:translateX(2px)}
-  }
-  @media(prefers-reduced-motion:reduce){.seat-btn{animation:none}}
+  .seat-btn svg{width:20px;height:20px;position:relative;z-index:1}
+  .seat-btn::after{content:"";position:absolute;top:0;left:-75%;width:45%;height:100%;background:linear-gradient(100deg,transparent,rgba(255,255,255,.5),transparent);transform:skewX(-18deg);animation:sheen 4s ease-in-out infinite;pointer-events:none}
+  @keyframes glowpulse{0%,100%{box-shadow:0 10px 30px -10px rgba(34,197,94,.5)}50%{box-shadow:0 14px 42px -8px rgba(34,197,94,.85)}}
+  @keyframes sheen{0%{left:-75%}30%{left:130%}100%{left:130%}}
+  @media(prefers-reduced-motion:reduce){.seat-btn{animation:none}.seat-btn::after{display:none}}
 
   /* Checkout modal (Stripe embed) */
   .co-overlay{position:fixed;inset:0;z-index:1000;display:none;align-items:flex-start;justify-content:center;background:rgba(4,18,12,.74);backdrop-filter:blur(6px);padding:24px 16px;overflow-y:auto}
@@ -121,6 +118,8 @@
 
   .guarantee{font-size:12.5px;color:var(--muted);margin-top:13px;display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap}
   .guarantee svg{width:14px;height:14px;color:var(--green);flex-shrink:0}
+  .dep-secure{font-size:11.5px;color:var(--muted);margin-top:10px;display:flex;align-items:center;justify-content:center;gap:6px;opacity:.85}
+  .dep-secure svg{width:13px;height:13px;color:var(--muted);flex-shrink:0}
 
   .trust{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin-top:28px}
   .trust .t{background:var(--panel-2);border:1px solid var(--border);border-radius:999px;padding:8px 15px;font-size:12.5px;font-weight:600}
@@ -327,12 +326,11 @@
     .dep-top{margin-bottom:16px}
     .dep-tag{font-size:10.5px;padding:5px 11px}
     .dep-live{font-size:11.5px}
-    .price-row{gap:16px}
-    .deposit .amount{font-size:58px}
-    .deposit .amount sup{font-size:23px}
-    .price-cycle{font-size:12px}
-    .price-anchor{padding-left:16px}
-    .pa-val{font-size:18px}
+    .dep-amount{font-size:62px}
+    .dep-amount sup{font-size:26px}
+    .dep-amount span{font-size:17px;margin-bottom:11px}
+    .dep-ledger{padding:6px 14px;margin-top:15px}
+    .lg{font-size:13px}
     .dep-unlocks{gap:6px 14px;margin:16px 0 2px}
     .dep-unlocks span{font-size:12px}
     .seats{margin:16px 0 4px}
@@ -415,9 +413,7 @@
     .hero h1{font-size:29px}
     h2{font-size:22.5px}
     .hero .thesis{font-size:15px}
-    .price-row{flex-direction:column;gap:10px}
-    .price-anchor{padding-left:0;border-left:none;border-top:1px solid var(--border);padding-top:12px;align-items:center;text-align:center}
-    .deposit .amount{font-size:62px}
+    .dep-amount{font-size:58px}
     .seat-btn{font-size:16px;gap:9px}
     .trust .t{font-size:11.5px;padding:6px 12px}
     .mbar{padding:10px 13px;gap:10px}
@@ -486,17 +482,16 @@
         <span class="dep-live"><b>17</b> reservando ahora</span>
       </div>
 
-      <div class="price-row">
-        <div class="price-main">
-          <span class="amount"><sup>$</sup>50</span>
-          <span class="price-cycle">hoy<br>para apartar</span>
-        </div>
-        <div class="price-anchor">
-          <span class="pa-from">programa completo</span>
-          <span class="pa-val">desde $380</span>
-          <span class="pa-note">tus $50 se descuentan</span>
-        </div>
+      <div class="dep-price">
+        <div class="dep-amount"><sup>$</sup>50<span>hoy</span></div>
+        <div class="dep-sub">Depósito para congelar tu silla</div>
       </div>
+      <div class="dep-ledger">
+        <div class="lg"><span class="lg-k">Programa Gen 01 · pago único</span><span class="lg-v">$375</span></div>
+        <div class="lg"><span class="lg-k">Tu depósito de hoy</span><span class="lg-v green">−$50</span></div>
+        <div class="lg total"><span class="lg-k">Te queda al inscribirte</span><span class="lg-v">$325</span></div>
+      </div>
+      <div class="dep-finance">o financiado en 2 pagos de $200</div>
 
       <div class="dep-unlocks">
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg> Congelas tu silla</span>
@@ -517,6 +512,10 @@
       <div class="guarantee">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/></svg>
         Depósito no reembolsable. Los $50 se abonan completos a tu inscripción.
+      </div>
+      <div class="dep-secure">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+        Pago 100% seguro vía Stripe · Visa, Mastercard, Apple Pay
       </div>
     </div>
 
@@ -809,14 +808,14 @@
       <div class="vrow"><div class="vt"><b>Mapa del ecosistema + tu stack</b><span>Higgsfield, HeyGen, ElevenLabs y más</span></div><div class="vv vstrike">$400</div></div>
       <div class="vrow"><div class="vt"><b>Vault de prompts + plantillas + casos</b><span>copy-pasteable, reutilizable</span></div><div class="vv vstrike">$300</div></div>
       <div class="vrow"><div class="vt"><b>La Sala de por vida</b><span>networking + recursos vivos para siempre</span></div><div class="vv vstrike">No tiene precio</div></div>
-      <div class="vrow total"><div class="vt"><b>Tu inversión en la Gen 01</b></div><div class="vv">desde $380</div></div>
+      <div class="vrow total"><div class="vt"><b>Tu inversión en la Gen 01</b></div><div class="vv">$375</div></div>
     </div>
 
     <div class="pay" style="margin-top:34px">
       <div class="pcard full">
         <div class="tag">Más elegido</div>
         <div class="pk">Pago único</div>
-        <div class="pprice">$380</div>
+        <div class="pprice">$375</div>
         <div class="pdesc">Todo el cohort + La Sala de por vida. Pagas una vez y listo.</div>
       </div>
       <div class="pcard fin">
@@ -850,8 +849,8 @@
     <h2>Lo que todos preguntan.</h2>
     <div class="sec-intro"></div>
     <div class="faq">
-      <div class="qa"><div class="q">¿El depósito de $50 es un costo extra? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">No. Es el <b>primer abono</b> de tu inscripción. Se descuenta del total ($380 único o $400 financiado). Solo apartas tu silla antes que el resto.</div></div></div>
-      <div class="qa"><div class="q">¿El depósito se devuelve? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">No. Los <b>$50 no son reembolsables</b>, pero no los pierdes: se descuentan completos de tu inscripción ($380 único o $400 financiado). Es tu compromiso para que la silla quede congelada a tu nombre hasta que abran las puertas.</div></div></div>
+      <div class="qa"><div class="q">¿El depósito de $50 es un costo extra? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">No. Es el <b>primer abono</b> de tu inscripción. Se descuenta del total ($375 único o $400 financiado). Solo apartas tu silla antes que el resto.</div></div></div>
+      <div class="qa"><div class="q">¿El depósito se devuelve? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">No. Los <b>$50 no son reembolsables</b>, pero no los pierdes: se descuentan completos de tu inscripción ($375 único o $400 financiado). Es tu compromiso para que la silla quede congelada a tu nombre hasta que abran las puertas.</div></div></div>
       <div class="qa"><div class="q">No sé nada de IA. ¿Voy a poder? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">Para esto está diseñado. El programa empieza <b>desde cero</b>, asumiendo que nunca has tocado Claude. Construimos tu hub paso a paso y el en vivo existe justo para resolver tus dudas.</div></div></div>
       <div class="qa"><div class="q">¿Tengo que salir en cámara? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">Para nada. <b>Ninguno de los dos caminos</b> (el dueño que incorpora IA o el proveedor que la vende) necesita cámara. La marca personal a profundidad es un módulo opcional, fuera del cohort.</div></div></div>
       <div class="qa"><div class="q">¿No tengo negocio todavía, me sirve? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">Sí. Es exactamente el <b>camino del Proveedor:</b> dominas la IA para ofrecerla como servicio a otros negocios. Sales con una habilidad monetizable y un servicio listo para vender.</div></div></div>
@@ -874,17 +873,16 @@
         <span class="dep-tag"><span class="dot-pulse"></span> Acceso anticipado</span>
         <span class="dep-live"><b>17</b> reservando ahora</span>
       </div>
-      <div class="price-row">
-        <div class="price-main">
-          <span class="amount"><sup>$</sup>50</span>
-          <span class="price-cycle">hoy<br>para apartar</span>
-        </div>
-        <div class="price-anchor">
-          <span class="pa-from">programa completo</span>
-          <span class="pa-val">desde $380</span>
-          <span class="pa-note">tus $50 se descuentan</span>
-        </div>
+      <div class="dep-price">
+        <div class="dep-amount"><sup>$</sup>50<span>hoy</span></div>
+        <div class="dep-sub">Depósito para congelar tu silla</div>
       </div>
+      <div class="dep-ledger">
+        <div class="lg"><span class="lg-k">Programa Gen 01 · pago único</span><span class="lg-v">$375</span></div>
+        <div class="lg"><span class="lg-k">Tu depósito de hoy</span><span class="lg-v green">−$50</span></div>
+        <div class="lg total"><span class="lg-k">Te queda al inscribirte</span><span class="lg-v">$325</span></div>
+      </div>
+      <div class="dep-finance">o financiado en 2 pagos de $200</div>
       <div class="seats">
         <div class="seats-meta"><span><b>41</b> de 75 sillas ocupadas</span><span class="seats-left">quedan 34</span></div>
         <div class="seats-bar"><div class="seats-fill"></div></div>
@@ -896,6 +894,10 @@
       <div class="guarantee">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/></svg>
         Depósito no reembolsable. Los $50 se abonan completos a tu inscripción.
+      </div>
+      <div class="dep-secure">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
+        Pago 100% seguro vía Stripe · Visa, Mastercard, Apple Pay
       </div>
     </div>
 
