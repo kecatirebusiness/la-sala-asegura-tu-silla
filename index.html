@@ -289,16 +289,16 @@
 
   /* FOUNDERS */
   .founders{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:920px;margin:0 auto}
-  .founder{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012));border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:transform .22s ease,border-color .22s,box-shadow .22s}
+  .founder{display:flex;flex-direction:column;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012));border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:transform .22s ease,border-color .22s,box-shadow .22s}
   .founder:hover{transform:translateY(-5px);border-color:rgba(34,197,94,.34);box-shadow:0 34px 64px -34px rgba(34,197,94,.5)}
-  .f-media{position:relative;aspect-ratio:4/5;overflow:hidden;background:#04120b}
+  .f-media{position:relative;aspect-ratio:4/5;overflow:hidden;background:#04120b;flex-shrink:0}
   .f-media .ph{width:100%;height:100%;object-fit:cover;display:block}
   .f-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,17,9,0) 40%,rgba(7,17,9,.55) 72%,rgba(7,17,9,.95) 100%);pointer-events:none}
   .f-tag{position:absolute;top:12px;left:12px;z-index:2;font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--green);background:rgba(4,18,12,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(34,197,94,.3);padding:5px 11px;border-radius:999px}
-  .f-name{position:absolute;left:17px;right:17px;bottom:15px;z-index:2}
+  .f-name{position:absolute;left:17px;right:17px;bottom:15px;z-index:2;text-align:center}
   .f-name h4{font-size:20px;font-weight:700;line-height:1.08;color:#fff;letter-spacing:-.01em}
   .f-name .role{font-size:11px;color:var(--core);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-top:6px}
-  .founder>p{font-size:13px;color:var(--muted);line-height:1.6;padding:16px 18px 20px;margin:0}
+  .founder>p{flex:1;display:flex;align-items:center;justify-content:center;text-align:center;font-size:13px;color:var(--muted);line-height:1.6;padding:18px 20px 22px;margin:0}
   .founders-note{text-align:center;font-size:14px;color:var(--muted);max-width:560px;margin:34px auto 0;line-height:1.6}
   .founders-note b{color:var(--text)}
 
@@ -356,8 +356,8 @@
     .gen-mega{font-size:clamp(96px,30vw,160px)}
     /* founders → tarjetas horizontales compactas en móvil */
     .founders{grid-template-columns:1fr;gap:12px;max-width:440px}
-    .founder{display:flex;min-height:186px}
-    .f-media{width:150px;flex-shrink:0;aspect-ratio:auto}
+    .founder{display:flex;flex-direction:row;align-items:stretch}
+    .f-media{width:144px;flex-shrink:0;aspect-ratio:3/4;align-self:center}
     .f-media .ph{height:100%}
     .f-tag{top:9px;left:9px;font-size:8.5px;letter-spacing:.06em;padding:4px 8px}
     .f-name{left:11px;right:11px;bottom:10px}
