@@ -266,19 +266,26 @@
   /* GEN-01 + cohort concept */
   .genwrap{text-align:center}
   .gen-eyebrow{font-size:12px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--muted)}
-  .gen-mega{font-weight:800;letter-spacing:-.05em;line-height:.82;font-size:clamp(82px,20vw,228px);margin:6px 0 4px;display:flex;align-items:baseline;justify-content:center;gap:.06em}
+  .gen-mega{font-weight:800;letter-spacing:-.05em;line-height:.82;font-size:clamp(82px,20vw,228px);margin:16px 0 0;display:flex;align-items:baseline;justify-content:center;gap:.06em}
   .gen-mega .y{background:linear-gradient(180deg,#eafff1,rgba(159,233,192,.35));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
   .gen-mega .num{color:var(--green);text-shadow:0 0 50px rgba(34,197,94,.45)}
-  .gen-sub{font-size:15px;color:var(--text);max-width:560px;margin:8px auto 0;line-height:1.55}
+  .gen-rule{width:46px;height:3px;border-radius:999px;background:linear-gradient(90deg,var(--green),var(--core));margin:30px auto 0;box-shadow:0 0 14px rgba(34,197,94,.5)}
+  .gen-sub{font-size:16px;color:var(--text);max-width:580px;margin:22px auto 0;line-height:1.72}
   .gen-sub b{color:var(--green)}
+  /* scroll reveal (aire + entrada con calma) */
+  .js .reveal{opacity:0;transform:translateY(24px);transition:opacity .75s cubic-bezier(.22,1,.36,1),transform .75s cubic-bezier(.22,1,.36,1)}
+  .js .reveal.in{opacity:1;transform:none}
+  .js .genflow .gf:nth-child(2){transition-delay:.09s} .js .genflow .gf:nth-child(3){transition-delay:.18s} .js .genflow .gf:nth-child(4){transition-delay:.27s}
+  .js .gen-two .gtwo:nth-child(2){transition-delay:.1s}
+  @media(prefers-reduced-motion:reduce){.js .reveal{opacity:1;transform:none;transition:none}}
 
-  .genflow{display:grid;grid-template-columns:repeat(4,1fr);gap:18px 22px;max-width:860px;margin:42px auto 0;text-align:left}
+  .genflow{display:grid;grid-template-columns:repeat(4,1fr);gap:18px 22px;max-width:860px;margin:64px auto 0;text-align:left}
   .gf{position:relative}
   .gf .gfn{display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:9px;background:var(--green-soft);color:var(--green);font-weight:800;font-size:13px;margin-bottom:12px}
   .gf h4{font-size:15.5px;margin-bottom:5px}
   .gf p{font-size:13px;color:var(--muted);line-height:1.5}
 
-  .gen-two{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:760px;margin:42px auto 0;text-align:left}
+  .gen-two{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:760px;margin:56px auto 0;text-align:left}
   .gtwo{border-radius:22px;padding:26px 28px}
   .gtwo.cohort{background:radial-gradient(420px 300px at 30% 0%,rgba(34,197,94,.12),transparent)}
   .gtwo.sala{background:radial-gradient(420px 300px at 30% 0%,rgba(185,139,240,.11),transparent)}
@@ -342,14 +349,14 @@
     /* stacked grids */
     .loss-grid,.ba,.avs,.flip,.gets,.pay,.steps{grid-template-columns:1fr}
     /* GEN-01 flow → timeline vertical en móvil */
-    .genflow{grid-template-columns:1fr;gap:0;max-width:340px;margin:32px auto 0}
+    .genflow{grid-template-columns:1fr;gap:0;max-width:340px;margin:46px auto 0}
     .gf{display:grid;grid-template-columns:auto 1fr;column-gap:16px;row-gap:3px;padding-bottom:22px;position:relative}
     .gf:last-child{padding-bottom:0}
     .gf:not(:last-child)::before{content:"";position:absolute;left:14px;top:37px;bottom:4px;width:2px;background:linear-gradient(180deg,rgba(34,197,94,.55),rgba(34,197,94,.08))}
     .gf .gfn{grid-column:1;grid-row:1/span 2;align-self:start;margin-bottom:0;position:relative;z-index:1;box-shadow:0 0 0 4px var(--bg)}
     .gf h4{grid-column:2;grid-row:1;align-self:center;font-size:16px}
     .gf p{grid-column:2;grid-row:2;font-size:13px}
-    .gen-two{grid-template-columns:1fr;gap:14px;max-width:440px;margin-top:32px}
+    .gen-two{grid-template-columns:1fr;gap:14px;max-width:440px;margin-top:44px}
     .gtwo{padding:22px 22px}
     .gen-mega{font-size:clamp(96px,30vw,160px)}
     /* founders → tarjetas horizontales compactas en móvil */
@@ -467,7 +474,7 @@
     </div>
   </div>
 </div>
-<script>document.body.classList.add('intro-lock');</script>
+<script>document.documentElement.classList.add('js');document.body.classList.add('intro-lock');</script>
 
 <!-- NAV -->
 <div class="nav">
@@ -489,22 +496,23 @@
 
     <div class="gen-eyebrow" style="margin-top:44px">Tu cohort se llama</div>
     <div class="gen-mega"><span class="y">GEN</span><span class="num">·01</span></div>
-    <p class="gen-sub">No compras un curso suelto: entras a una <b>Generación</b>: un grupo que arranca el mismo día, avanza junto las 6 semanas y se gradúa junto. Tú serías de la <b>primera, la Gen 01.</b></p>
+    <div class="gen-rule reveal"></div>
+    <p class="gen-sub reveal">No compras un curso suelto: entras a una <b>Generación</b>: un grupo que arranca el mismo día, avanza junto las 6 semanas y se gradúa junto. Tú serías de la <b>primera, la Gen 01.</b></p>
 
     <div class="genflow">
-      <div class="gf"><div class="gfn">1</div><h4>Doors abren</h4><p>Se anuncia la Generación. Entra quien aparta su silla, hasta llenar los 75.</p></div>
-      <div class="gf"><div class="gfn">2</div><h4>Arrancan juntos</h4><p>Todos empiezan el mismo día. 6 semanas sincronizados, en vivo y a tu ritmo.</p></div>
-      <div class="gf"><div class="gfn">3</div><h4>Se gradúan</h4><p>Demo Day. Sales con tu hub, tu sistema y tu negocio potenciado con IA.</p></div>
-      <div class="gf"><div class="gfn">4</div><h4>Pasan a La Sala</h4><p>Perteneces para siempre al espacio de todos los graduados de cada Gen.</p></div>
+      <div class="gf reveal"><div class="gfn">1</div><h4>Doors abren</h4><p>Se anuncia la Generación. Entra quien aparta su silla, hasta llenar los 75.</p></div>
+      <div class="gf reveal"><div class="gfn">2</div><h4>Arrancan juntos</h4><p>Todos empiezan el mismo día. 6 semanas sincronizados, en vivo y a tu ritmo.</p></div>
+      <div class="gf reveal"><div class="gfn">3</div><h4>Se gradúan</h4><p>Demo Day. Sales con tu hub, tu sistema y tu negocio potenciado con IA.</p></div>
+      <div class="gf reveal"><div class="gfn">4</div><h4>Pasan a La Sala</h4><p>Perteneces para siempre al espacio de todos los graduados de cada Gen.</p></div>
     </div>
 
     <div class="gen-two">
-      <div class="gtwo cohort">
+      <div class="gtwo cohort reveal">
         <div class="gk">Espacio temporal · 6 semanas</div>
         <h4>El cohort activo</h4>
         <p>Donde vive tu Generación durante el programa: los en vivos, la construcción de las marcas, las dudas resueltas, la energía del grupo. Cuando termina, sales del cohort, pero no de La Sala.</p>
       </div>
-      <div class="gtwo sala">
+      <div class="gtwo sala reveal">
         <div class="gk">Espacio permanente · de por vida</div>
         <h4>La Sala</h4>
         <p>La casa de todas las Generaciones. Networking entre cohorts, recursos vivos, perks de graduado. Aquí la Gen 01 inspira a la Gen 02. Aquí nadie sale: aquí se pertenece.</p>
@@ -999,6 +1007,17 @@
         },520);
       },220);
     });
+  })();
+
+  // Scroll reveal (entrada escalonada con calma)
+  (function(){
+    var els=document.querySelectorAll('.reveal');
+    if(!els.length)return;
+    if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('in');});return;}
+    var io=new IntersectionObserver(function(ents){
+      ents.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+    },{threshold:.14,rootMargin:'0px 0px -7% 0px'});
+    els.forEach(function(e){io.observe(e);});
   })();
 
   // FAQ accordion
