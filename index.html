@@ -421,30 +421,51 @@
     .mbar .mp{font-size:12.5px}
   }
 
-  /* ======================= INTRO / PRELOADER ======================= */
+  /* ======================= INTRO / TERMINAL ======================= */
   body.intro-lock{overflow:hidden}
-  #intro{position:fixed;inset:0;z-index:9999;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:22px;
-    background:radial-gradient(680px 480px at 50% 42%,rgba(34,197,94,.16),transparent),var(--bg);
-    transition:opacity .6s ease,visibility .6s ease}
+  #intro{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;
+    background:radial-gradient(680px 480px at 50% 42%,rgba(34,197,94,.14),transparent),var(--bg);
+    transition:opacity .55s ease,visibility .55s ease;cursor:pointer}
   #intro.hide{opacity:0;visibility:hidden}
-  .intro-logo{width:88px;height:88px;filter:drop-shadow(0 0 26px rgba(34,197,94,.5));animation:introPop 1s cubic-bezier(.22,1,.36,1) both}
-  .intro-word{font-size:27px;font-weight:800;letter-spacing:-.02em;color:#fff;opacity:0;animation:introFade .7s ease .4s both;text-align:center}
+  .intro-stage{display:flex;flex-direction:column;align-items:center;gap:22px;width:min(90vw,430px)}
+  .term{width:100%;background:rgba(5,15,10,.94);border:1px solid rgba(34,197,94,.22);border-radius:14px;overflow:hidden;box-shadow:0 34px 90px -34px rgba(0,0,0,.75),0 0 0 1px rgba(255,255,255,.02) inset;opacity:0;transform:translateY(10px) scale(.98);animation:termIn .5s cubic-bezier(.22,1,.36,1) both}
+  .term-bar{display:flex;align-items:center;gap:8px;padding:9px 13px;background:rgba(255,255,255,.03);border-bottom:1px solid rgba(255,255,255,.06)}
+  .term-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+  .term-dot.r{background:#ff5f57}.term-dot.y{background:#febc2e}.term-dot.g{background:#28c840}
+  .term-title{margin-left:5px;font-size:11.5px;color:var(--muted);font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;display:flex;align-items:center;gap:7px}
+  .term-title .lsi-logo{width:15px;height:15px}
+  .term-body{padding:16px 16px 18px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:13.5px;line-height:1.8;min-height:98px;color:#cfeede}
+  .tl{white-space:pre-wrap;word-break:break-word}
+  .tl .pr{color:var(--core)} .tl .ar{color:var(--muted)} .tl .ok{color:var(--green);font-weight:600}
+  .cur{display:inline-block;width:8px;margin-left:1px;color:var(--green);animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .intro-brand{display:flex;flex-direction:column;align-items:center;gap:11px;opacity:0}
+  .intro-brand.show{animation:brandIn .6s cubic-bezier(.22,1,.36,1) both}
+  .intro-brand .lsi-logo{width:58px;height:58px;filter:drop-shadow(0 0 22px rgba(34,197,94,.55))}
+  .intro-word{font-size:22px;font-weight:800;letter-spacing:-.02em;color:#fff}
   .intro-word em{font-style:italic;font-weight:600;color:var(--green)}
-  .intro-bar{width:132px;height:3px;border-radius:999px;background:rgba(255,255,255,.09);overflow:hidden;opacity:0;animation:introFade .5s ease .55s both}
-  .intro-bar i{display:block;height:100%;width:0;border-radius:999px;background:linear-gradient(90deg,var(--green),var(--core));box-shadow:0 0 12px rgba(34,197,94,.6);animation:introLoad 1.15s cubic-bezier(.4,0,.2,1) .55s forwards}
-  @keyframes introPop{0%{opacity:0;transform:scale(.55) translateY(8px)}55%{opacity:1}100%{opacity:1;transform:scale(1) translateY(0)}}
-  @keyframes introFade{to{opacity:1}}
-  @keyframes introLoad{to{width:100%}}
-  @media(prefers-reduced-motion:reduce){#intro .intro-logo,#intro .intro-word,#intro .intro-bar,#intro .intro-bar i{animation:none;opacity:1}}
+  @keyframes termIn{to{opacity:1;transform:none}}
+  @keyframes brandIn{from{opacity:0;transform:translateY(8px) scale(.9)}to{opacity:1;transform:none}}
+  @media(prefers-reduced-motion:reduce){#intro *{animation:none!important}.intro-brand{opacity:1}}
 </style>
 </head>
 <body>
 
-<!-- INTRO / PRELOADER -->
+<!-- INTRO / TERMINAL -->
 <div id="intro">
-  <svg class="intro-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#00D26A"/><circle cx="15.4" cy="17" r="1.9" fill="#04240f"/><circle cx="24.6" cy="17" r="1.9" fill="#04240f"/><line x1="16.4" y1="23.4" x2="23.6" y2="23.4" stroke="#04240f" stroke-width="2.1" stroke-linecap="round"/></svg>
-  <div class="intro-word">La Sala <em>de IA</em></div>
-  <div class="intro-bar"><i></i></div>
+  <div class="intro-stage">
+    <div class="term">
+      <div class="term-bar">
+        <span class="term-dot r"></span><span class="term-dot y"></span><span class="term-dot g"></span>
+        <span class="term-title"><svg class="lsi-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#00D26A"/><circle cx="15.4" cy="17" r="1.9" fill="#04240f"/><circle cx="24.6" cy="17" r="1.9" fill="#04240f"/><line x1="16.4" y1="23.4" x2="23.6" y2="23.4" stroke="#04240f" stroke-width="2.1" stroke-linecap="round"/></svg> la-sala — zsh</span>
+      </div>
+      <div class="term-body" id="termBody"></div>
+    </div>
+    <div class="intro-brand" id="introBrand">
+      <svg class="lsi-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#00D26A"/><circle cx="15.4" cy="17" r="1.9" fill="#04240f"/><circle cx="24.6" cy="17" r="1.9" fill="#04240f"/><line x1="16.4" y1="23.4" x2="23.6" y2="23.4" stroke="#04240f" stroke-width="2.1" stroke-linecap="round"/></svg>
+      <div class="intro-word">La Sala <em>de IA</em></div>
+    </div>
+  </div>
 </div>
 <script>document.body.classList.add('intro-lock');</script>
 
@@ -941,20 +962,43 @@
 </div>
 
 <script>
-  // Intro / preloader
+  // Intro / terminal
   (function(){
     var intro=document.getElementById('intro');
     if(!intro){document.body.classList.remove('intro-lock');return;}
+    var body=document.getElementById('termBody');
+    var brand=document.getElementById('introBrand');
+    var done=false;
     function hide(){
-      if(intro.classList.contains('hide'))return;
+      if(done)return;done=true;
       intro.classList.add('hide');
       document.body.classList.remove('intro-lock');
-      setTimeout(function(){if(intro&&intro.parentNode)intro.parentNode.removeChild(intro);},700);
+      setTimeout(function(){if(intro&&intro.parentNode)intro.parentNode.removeChild(intro);},600);
     }
+    intro.addEventListener('click',hide); // click para saltar
     var reduce=window.matchMedia&&window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-    if(reduce){hide();return;}
-    window.addEventListener('load',function(){setTimeout(hide,1750);});
-    setTimeout(hide,3600); // fallback si 'load' tarda
+    if(reduce){brand.classList.add('show');setTimeout(hide,900);return;}
+    setTimeout(hide,4600); // fallback
+
+    function line(html){var d=document.createElement('div');d.className='tl';d.innerHTML=html;body.appendChild(d);return d;}
+    var PR='<span class="pr">$</span> ';
+    function type(el,text,speed,cb){
+      var i=0;
+      (function step(){
+        if(i<=text.length){el.innerHTML=PR+text.slice(0,i)+'<span class="cur">▋</span>';i++;setTimeout(step,speed);}
+        else{el.innerHTML=PR+text;if(cb)cb();}
+      })();
+    }
+    var l1=line(PR);
+    type(l1,'la-sala --start',34,function(){
+      setTimeout(function(){
+        line('<span class="ar">›</span> cargando el ecosistema de IA…');
+        setTimeout(function(){
+          line('<span class="ok">✓ listo — bienvenido a La Sala</span>');
+          setTimeout(function(){ brand.classList.add('show'); setTimeout(hide,820); },340);
+        },520);
+      },220);
+    });
   })();
 
   // FAQ accordion
