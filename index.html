@@ -575,6 +575,24 @@
     .funnel-bridge{margin:-6px auto 24px}
     .fb-line{height:38px}
   }
+
+  /* ===== checkout embebido (modal) ===== */
+  .pay-overlay{position:fixed;inset:0;z-index:2000;display:none;align-items:flex-start;justify-content:center;background:rgba(4,14,9,.78);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:24px 14px;overflow-y:auto}
+  .pay-overlay.open{display:flex}
+  .pay-modal{position:relative;width:100%;max-width:560px;background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 40px 100px -30px rgba(0,0,0,.65);margin:auto;animation:payIn .25s ease}
+  @keyframes payIn{from{opacity:0;transform:translateY(14px) scale(.99)}to{opacity:1;transform:none}}
+  .pay-head{display:flex;align-items:center;gap:9px;padding:13px 52px 13px 16px;background:linear-gradient(135deg,var(--green),var(--core));color:#04240f;font-weight:800;font-size:14.5px}
+  .pay-head .lsi-logo{width:23px;height:23px}
+  .pay-close{position:absolute;top:11px;right:12px;background:rgba(4,36,15,.16);border:none;color:#04240f;width:30px;height:30px;border-radius:50%;font-size:19px;line-height:1;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:2}
+  .pay-close:hover{background:rgba(4,36,15,.3)}
+  #checkout{min-height:420px;padding:4px}
+  .pay-loading{padding:56px 20px;text-align:center;color:#0a7d43;font-weight:600;font-size:14px}
+  .pay-ok{max-width:430px}
+  .pay-ok-in{padding:42px 30px 34px;text-align:center;color:#0b1d17}
+  .pay-ok-ic{width:60px;height:60px;border-radius:50%;background:var(--green-soft);color:#0a7d43;font-size:30px;font-weight:800;display:flex;align-items:center;justify-content:center;margin:0 auto 16px}
+  .pay-ok-in h3{font-size:21px;font-weight:800;margin-bottom:10px}
+  .pay-ok-in p{font-size:14px;color:#3a4a42;line-height:1.55}
+  @media(max-width:560px){.pay-overlay{padding:0}.pay-modal{max-width:none;min-height:100%;border-radius:0}}
 </style>
 </head>
 <body>
@@ -1151,6 +1169,29 @@
   <a href="https://buy.stripe.com/6oU8wOcM220A42Hb62djO02" class="js-reserve">Asegura tu silla</a>
 </div>
 
+<!-- CHECKOUT EMBEBIDO (Stripe) -->
+<div id="pay-overlay" class="pay-overlay" aria-hidden="true">
+  <div class="pay-modal">
+    <button class="pay-close" aria-label="Cerrar">×</button>
+    <div class="pay-head">
+      <svg class="lsi-logo" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#00D26A"/><circle cx="15.4" cy="17" r="1.9" fill="#04240f"/><circle cx="24.6" cy="17" r="1.9" fill="#04240f"/><line x1="16.4" y1="23.4" x2="23.6" y2="23.4" stroke="#04240f" stroke-width="2.1" stroke-linecap="round"/></svg>
+      Asegura tu silla · $50
+    </div>
+    <div id="checkout"><div class="pay-loading">Cargando pago seguro…</div></div>
+  </div>
+</div>
+<div id="pay-success" class="pay-overlay" aria-hidden="true">
+  <div class="pay-modal pay-ok">
+    <button class="pay-close" aria-label="Cerrar">×</button>
+    <div class="pay-ok-in">
+      <div class="pay-ok-ic">✓</div>
+      <h3>¡Tu silla está apartada!</h3>
+      <p>Recibiste el comprobante en tu correo. Te avisamos de primero cuando abran las puertas de la Generación 01.</p>
+    </div>
+  </div>
+</div>
+
+<script src="https://js.stripe.com/v3/"></script>
 <script>
   // Intro / terminal
   (function(){
@@ -1236,11 +1277,44 @@
     });
   });
 
-  // Reserve buttons — van directo al checkout de Stripe (Payment Link)
-  var CHECKOUT_URL = 'https://buy.stripe.com/6oU8wOcM220A42Hb62djO02';
-  document.querySelectorAll('.js-reserve').forEach(function(b){
-    b.setAttribute('href', CHECKOUT_URL);
-  });
+  // ===== Checkout embebido (Vercel) con fallback al Payment Link =====
+  var PAYMENT_LINK = 'https://buy.stripe.com/6oU8wOcM220A42Hb62djO02';
+  (function(){
+    var overlay=document.getElementById('pay-overlay');
+    var stripe=null, clientSecret=null, checkout=null, mounting=false;
+    function lock(){document.body.style.overflow='hidden';}
+    function unlock(){document.body.style.overflow='';}
+    function hideOverlay(){ if(overlay){overlay.classList.remove('open');unlock();} }
+    async function openPay(e){
+      if(e) e.preventDefault();
+      try{
+        if(!overlay||typeof Stripe==='undefined') throw 0;
+        if(!stripe){ var c=await fetch('/api/config'); if(!c.ok) throw 0; var cj=await c.json(); if(!cj.pk) throw 0; stripe=Stripe(cj.pk); }
+        if(!clientSecret){ var r=await fetch('/api/create-checkout-session',{method:'POST'}); if(!r.ok) throw 0; var d=await r.json(); clientSecret=d.clientSecret; if(!clientSecret) throw 0; }
+        overlay.classList.add('open'); lock();
+        if(!checkout && !mounting){ mounting=true; checkout=await stripe.initEmbeddedCheckout({clientSecret:clientSecret}); checkout.mount('#checkout'); mounting=false; }
+      }catch(err){ window.location.href=PAYMENT_LINK; }
+    }
+    document.querySelectorAll('.js-reserve').forEach(function(b){
+      b.setAttribute('href',PAYMENT_LINK);
+      b.addEventListener('click',openPay);
+    });
+    if(overlay){
+      overlay.addEventListener('click',function(e){ if(e.target===overlay) hideOverlay(); });
+      var cb=overlay.querySelector('.pay-close'); if(cb) cb.addEventListener('click',hideOverlay);
+      document.addEventListener('keydown',function(e){ if(e.key==='Escape') hideOverlay(); });
+    }
+    // Retorno tras pagar (?pago=ok)
+    var qp=new URLSearchParams(location.search);
+    if(qp.get('pago')==='ok'){
+      var ok=document.getElementById('pay-success');
+      if(ok){ ok.classList.add('open'); lock();
+        function closeOk(){ ok.classList.remove('open'); unlock(); history.replaceState({},'',location.pathname); }
+        ok.addEventListener('click',function(e){ if(e.target===ok) closeOk(); });
+        var okc=ok.querySelector('.pay-close'); if(okc) okc.addEventListener('click',closeOk);
+      }
+    }
+  })();
 </script>
 </body>
 </html>
