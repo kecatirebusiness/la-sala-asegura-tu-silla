@@ -338,7 +338,14 @@
 
     /* stacked grids */
     .loss-grid,.ba,.avs,.flip,.gets,.pay,.steps{grid-template-columns:1fr}
-    .genflow{grid-template-columns:1fr 1fr;gap:20px 18px;max-width:420px;margin-top:34px}
+    /* GEN-01 flow → timeline vertical en móvil */
+    .genflow{grid-template-columns:1fr;gap:0;max-width:340px;margin:32px auto 0}
+    .gf{display:grid;grid-template-columns:auto 1fr;column-gap:16px;row-gap:3px;padding-bottom:22px;position:relative}
+    .gf:last-child{padding-bottom:0}
+    .gf:not(:last-child)::before{content:"";position:absolute;left:14px;top:37px;bottom:4px;width:2px;background:linear-gradient(180deg,rgba(34,197,94,.55),rgba(34,197,94,.08))}
+    .gf .gfn{grid-column:1;grid-row:1/span 2;align-self:start;margin-bottom:0;position:relative;z-index:1;box-shadow:0 0 0 4px var(--bg)}
+    .gf h4{grid-column:2;grid-row:1;align-self:center;font-size:16px}
+    .gf p{grid-column:2;grid-row:2;font-size:13px}
     .gen-two{grid-template-columns:1fr;gap:14px;max-width:440px;margin-top:32px}
     .gtwo{padding:22px 22px}
     .gen-mega{font-size:clamp(96px,30vw,160px)}
@@ -428,7 +435,7 @@
 
     <div class="gen-eyebrow" style="margin-top:44px">Tu cohort se llama</div>
     <div class="gen-mega"><span class="y">GEN</span><span class="num">·01</span></div>
-    <p class="gen-sub">No compras un curso suelto: entras a una <b>Generación</b> — un grupo que arranca el mismo día, avanza junto las 6 semanas y se gradúa junto. Tú serías de la <b>primera, la Gen 01.</b></p>
+    <p class="gen-sub">No compras un curso suelto: entras a una <b>Generación</b>: un grupo que arranca el mismo día, avanza junto las 6 semanas y se gradúa junto. Tú serías de la <b>primera, la Gen 01.</b></p>
 
     <div class="genflow">
       <div class="gf"><div class="gfn">1</div><h4>Doors abren</h4><p>Se anuncia la Generación. Entra quien aparta su silla, hasta llenar los 75.</p></div>
@@ -441,7 +448,7 @@
       <div class="gtwo cohort">
         <div class="gk">Espacio temporal · 6 semanas</div>
         <h4>El cohort activo</h4>
-        <p>Donde vive tu Generación durante el programa: los en vivos, la construcción de las marcas, las dudas resueltas, la energía del grupo. Cuando termina, sales del cohort — pero no de La Sala.</p>
+        <p>Donde vive tu Generación durante el programa: los en vivos, la construcción de las marcas, las dudas resueltas, la energía del grupo. Cuando termina, sales del cohort, pero no de La Sala.</p>
       </div>
       <div class="gtwo sala">
         <div class="gk">Espacio permanente · de por vida</div>
@@ -491,12 +498,12 @@
 
       <a href="https://buy.stripe.com/6oU8wOcM220A42Hb62djO02" class="seat-btn js-reserve">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
-        Asegura tu silla — $50
+        Asegura tu silla · $50
       </a>
 
       <div class="guarantee">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/></svg>
-        Tu primer abono — los $50 se descuentan del total al inscribirte
+        Depósito no reembolsable. Los $50 se abonan completos a tu inscripción.
       </div>
     </div>
 
@@ -514,28 +521,28 @@
   <div class="wrap">
     <div class="sec-label">Quiénes te enseñan</div>
     <h2>No es un gurú anónimo. <em>Somos tres, y construimos en vivo contigo.</em></h2>
-    <p class="sec-intro">La Gen 01 la guiamos los tres socios de La Sala. Nada de teoría grabada y desaparecer — estamos en los en vivos, resolviendo tu caso.</p>
+    <p class="sec-intro">La Gen 01 la guiamos los tres socios de La Sala. Nada de teoría grabada y desaparecer. Estamos en los en vivos, resolviendo tu caso.</p>
     <div class="founders">
       <div class="founder">
         <div class="ph">K</div>
         <h4>Kevin</h4>
         <div class="role">Claude · sistemas de IA</div>
-        <p>[Bio corta de Kevin — qué haces, por qué dominas Claude y la IA aplicada al negocio. 2-3 líneas.]</p>
+        <p>[Bio corta de Kevin: qué haces, por qué dominas Claude y la IA aplicada al negocio. 2 a 3 líneas.]</p>
       </div>
       <div class="founder">
         <div class="ph">M</div>
         <h4>Manu</h4>
         <div class="role">[su rol]</div>
-        <p>[Bio corta de Manu — su fuerte, su experiencia, qué aporta al cohort. 2-3 líneas.]</p>
+        <p>[Bio corta de Manu: su fuerte, su experiencia, qué aporta al cohort. 2 a 3 líneas.]</p>
       </div>
       <div class="founder">
         <div class="ph">E</div>
         <h4>Elsa</h4>
         <div class="role">Co-host en vivo</div>
-        <p>[Bio corta de Elsa — su rol en los en vivos y qué aporta. 2-3 líneas.]</p>
+        <p>[Bio corta de Elsa: su rol en los en vivos y qué aporta. 2 a 3 líneas.]</p>
       </div>
     </div>
-    <p class="founders-note">Tres socios, partes iguales, un mismo objetivo: que <b>salgas de la Gen 01 operando tu negocio con IA</b> — o vendiéndosela a quien no sabe.</p>
+    <p class="founders-note">Tres socios, partes iguales, un mismo objetivo: que <b>salgas de la Gen 01 operando tu negocio con IA</b>, o vendiéndosela a quien no sabe.</p>
   </div>
 </section>
 
@@ -544,14 +551,14 @@
   <div class="wrap">
     <div class="sec-label" style="color:var(--danger)">La verdad incómoda</div>
     <h2>Cada mes que dudas, <em>la brecha se hace más grande.</em></h2>
-    <p class="sec-intro">No es que te falte tiempo. Es que estás haciendo a mano lo que tu competencia ya delegó a la IA — y ese tiempo no vuelve.</p>
+    <p class="sec-intro">No es que te falte tiempo. Es que estás haciendo a mano lo que tu competencia ya delegó a la IA, y ese tiempo no vuelve.</p>
     <div class="loss-grid">
       <div class="loss"><span class="x">✕</span><p>Pasas <b>horas en tareas</b> que la IA resuelve en minutos: emails, propuestas, contenido, admin.</p></div>
       <div class="loss"><span class="x">✕</span><p>Pagas por <b>software, freelancers o un asistente</b> que un buen hub de IA reemplaza.</p></div>
       <div class="loss"><span class="x">✕</span><p>Ves a otros <b>cobrar por servicios de IA</b> y sientes que el tren se te va sin haberte subido.</p></div>
       <div class="loss"><span class="x">✕</span><p>Abriste ChatGPT, no supiste qué pedirle, y <b>lo cerraste pensando "esto no es para mí".</b></p></div>
     </div>
-    <p class="gap-line">La diferencia entre quien usa IA y quien no, hoy son meses. <b>En 12 meses serán años de ventaja.</b> La buena noticia: cerrar esa brecha toma 6 semanas — si alguien te lleva de la mano.</p>
+    <p class="gap-line">La diferencia entre quien usa IA y quien no, hoy son meses. <b>En 12 meses serán años de ventaja.</b> La buena noticia: cerrar esa brecha toma 6 semanas, si alguien te lleva de la mano.</p>
   </div>
 </section>
 
@@ -603,7 +610,7 @@
         <span class="pill">El camino nuevo</span>
         <h3>El Proveedor de servicios de IA</h3>
         <p class="q">"No tengo negocio aún, pero quiero dominar esto para ofrecérselo a otros negocios y cobrar."</p>
-        <p class="out">Sales con <b>una habilidad monetizable</b> y un servicio que ofrecer desde ya — el oficio más demandado de los próximos años.</p>
+        <p class="out">Sales con <b>una habilidad monetizable</b> y un servicio que ofrecer desde ya: el oficio más demandado de los próximos años.</p>
       </div>
     </div>
   </div>
@@ -614,7 +621,7 @@
   <div class="wrap">
     <div class="sec-label">Cómo se aprende aquí</div>
     <h2>No es un curso de videos que nunca terminas.</h2>
-    <p class="sec-intro">Aula invertida: lo pregrabado te prepara a tu ritmo, el en vivo se gasta aplicando y resolviendo. Llegas con contexto — así que nadie se queda atrás.</p>
+    <p class="sec-intro">Aula invertida: lo pregrabado te prepara a tu ritmo, el en vivo se gasta aplicando y resolviendo. Llegas con contexto, así que nadie se queda atrás.</p>
     <div class="flip">
       <div class="fbox rec">
         <div class="k">Antes · pregrabado</div>
@@ -638,7 +645,7 @@
         </ul>
       </div>
     </div>
-    <div class="hub"><b>Claude es el hub central</b>, no un módulo más. Es lo primero que construyes y lo que usas hasta el final — cada herramienta, cada tarea, pasa por él.</div>
+    <div class="hub"><b>Claude es el hub central</b>, no un módulo más. Es lo primero que construyes y lo que usas hasta el final: cada herramienta, cada tarea, pasa por él.</div>
   </div>
 </section>
 
@@ -657,7 +664,7 @@
             <div class="wk-c rec"><div class="ck">Pregrabado</div><p>Pensar con Claude, prompting que funciona, Projects.</p></div>
             <div class="wk-c live"><div class="ck">En vivo</div><p>Montamos tu hub paso a paso, con tu contexto real.</p></div>
           </div>
-          <div class="wk-proj"><b>Tu proyecto:</b> tu master de Claude funcionando — el cerebro de todo lo que sigue.</div>
+          <div class="wk-proj"><b>Tu proyecto:</b> tu master de Claude funcionando: el cerebro de todo lo que sigue.</div>
         </div></div>
       </div>
 
@@ -679,7 +686,7 @@
             <div class="wk-c rec"><div class="ck">Pregrabado</div><p>Higgsfield, HeyGen, ElevenLabs: qué son y para qué sirven.</p></div>
             <div class="wk-c live"><div class="ck">En vivo</div><p>Aplicamos las herramientas a las dos marcas.</p></div>
           </div>
-          <div class="wk-proj"><b>Tu proyecto:</b> tu stack de IA elegido — sabes qué usar y cuándo.</div>
+          <div class="wk-proj"><b>Tu proyecto:</b> tu stack de IA elegido: sabes qué usar y cuándo.</div>
         </div></div>
       </div>
 
@@ -753,7 +760,7 @@
       </div>
       <div class="get">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20 15 15 0 010-20"/></svg></div>
-        <div><h4>El ecosistema completo</h4><p>Higgsfield, HeyGen, ElevenLabs y más — qué usar, cuándo y cómo conectarlo.</p></div>
+        <div><h4>El ecosistema completo</h4><p>Higgsfield, HeyGen, ElevenLabs y más: qué usar, cuándo y cómo conectarlo.</p></div>
       </div>
       <div class="get">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13l2 2 4-4"/></svg></div>
@@ -776,7 +783,7 @@
   <div class="wrap">
     <div class="sec-label">Lo que vale vs. lo que pagas</div>
     <h2>Haz la cuenta de lo que esto reemplaza.</h2>
-    <p class="sec-intro">Un asistente, las herramientas, el contenido, las consultorías sueltas. Todo eso, en un solo programa — y por una fracción.</p>
+    <p class="sec-intro">Un asistente, las herramientas, el contenido, las consultorías sueltas. Todo eso, en un solo programa, y por una fracción.</p>
     <div class="vstack">
       <div class="vrow"><div class="vt"><b>6 semanas en vivo (cohort completo)</b><span>aula invertida + construcción en directo</span></div><div class="vv vstrike">$900</div></div>
       <div class="vrow"><div class="vt"><b>Tu hub de Claude montado contigo</b><span>el cerebro de tu operación</span></div><div class="vv vstrike">$500</div></div>
@@ -799,7 +806,7 @@
         <div class="pdesc">2 pagos de $200. La segunda cuota se cobra automática ~30 días después.</div>
       </div>
     </div>
-    <p class="pay-note"><b>Tus $50 de reserva se acreditan</b> a la opción que elijas — pagas solo la diferencia al inscribirte. El depósito no es reembolsable: es tu compromiso para guardar la silla.</p>
+    <p class="pay-note"><b>Tus $50 de reserva se acreditan</b> a la opción que elijas: pagas solo la diferencia al inscribirte. El depósito no es reembolsable, es tu compromiso para guardar la silla.</p>
   </div>
 </section>
 
@@ -825,13 +832,13 @@
     <div class="sec-intro"></div>
     <div class="faq">
       <div class="qa"><div class="q">¿El depósito de $50 es un costo extra? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">No. Es el <b>primer abono</b> de tu inscripción. Se descuenta del total ($380 único o $400 financiado). Solo apartas tu silla antes que el resto.</div></div></div>
-      <div class="qa"><div class="q">¿El depósito se devuelve? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">No. Los <b>$50 no son reembolsables</b> — pero no los pierdes: se descuentan completos de tu inscripción ($380 único o $400 financiado). Es tu compromiso para que la silla quede congelada a tu nombre hasta que abran las puertas.</div></div></div>
+      <div class="qa"><div class="q">¿El depósito se devuelve? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">No. Los <b>$50 no son reembolsables</b>, pero no los pierdes: se descuentan completos de tu inscripción ($380 único o $400 financiado). Es tu compromiso para que la silla quede congelada a tu nombre hasta que abran las puertas.</div></div></div>
       <div class="qa"><div class="q">No sé nada de IA. ¿Voy a poder? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">Para esto está diseñado. El programa empieza <b>desde cero</b>, asumiendo que nunca has tocado Claude. Construimos tu hub paso a paso y el en vivo existe justo para resolver tus dudas.</div></div></div>
       <div class="qa"><div class="q">¿Tengo que salir en cámara? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">Para nada. <b>Ninguno de los dos caminos</b> (el dueño que incorpora IA o el proveedor que la vende) necesita cámara. La marca personal a profundidad es un módulo opcional, fuera del cohort.</div></div></div>
       <div class="qa"><div class="q">¿No tengo negocio todavía, me sirve? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">Sí. Es exactamente el <b>camino del Proveedor:</b> dominas la IA para ofrecerla como servicio a otros negocios. Sales con una habilidad monetizable y un servicio listo para vender.</div></div></div>
       <div class="qa"><div class="q">¿Y si no puedo asistir a un en vivo? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in"><b>Todo queda grabado</b> en la biblioteca. Puedes verlo a tu ritmo y traer tus dudas al siguiente en vivo. El formato de aula invertida está pensado para gente con poco tiempo.</div></div></div>
       <div class="qa"><div class="q">¿Cuándo arranca la Generación 01? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">Las puertas abren pronto y todo el cohort arranca <b>sincronizado el mismo día.</b> Los que reservaron con depósito reciben el aviso primero y entran antes que la lista general.</div></div></div>
-      <div class="qa"><div class="q">¿Qué pasa cuando terminan las 6 semanas? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">Te gradúas en el Demo Day y pasas a <b>La Sala</b> — el espacio permanente de todos los graduados, con networking entre generaciones y los recursos vivos. Aquí no sales: aquí se pertenece.</div></div></div>
+      <div class="qa"><div class="q">¿Qué pasa cuando terminan las 6 semanas? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">Te gradúas en el Demo Day y pasas a <b>La Sala</b>: el espacio permanente de todos los graduados, con networking entre generaciones y los recursos vivos. Aquí no sales: aquí se pertenece.</div></div></div>
     </div>
   </div>
 </section>
@@ -841,7 +848,7 @@
   <div class="wrap narrow">
     <div class="scarce"><span class="dot-pulse"></span> Solo 75 sillas en la Generación 01</div>
     <h2>Cada silla apartada <em>es una menos disponible.</em></h2>
-    <p class="sec-intro">Mientras tú lo piensas, otros ya están reservando. Los $50 se descuentan de tu inscripción — la silla, una vez llena, no vuelve hasta la Gen 02.</p>
+    <p class="sec-intro">Mientras tú lo piensas, otros ya están reservando. Los $50 se descuentan de tu inscripción. La silla, una vez llena, no vuelve hasta la Gen 02.</p>
 
     <div class="deposit" style="margin-top:8px">
       <div class="dep-top">
@@ -865,15 +872,15 @@
       </div>
       <a href="https://buy.stripe.com/6oU8wOcM220A42Hb62djO02" class="seat-btn js-reserve">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
-        Asegura tu silla — $50
+        Asegura tu silla · $50
       </a>
       <div class="guarantee">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6l8-4z"/></svg>
-        Tu primer abono — los $50 se descuentan del total al inscribirte
+        Depósito no reembolsable. Los $50 se abonan completos a tu inscripción.
       </div>
     </div>
 
-    <p class="ps"><b>P.D.</b> — La IA no va a esperar a que estés listo. Dentro de un año vas a estar usándola sí o sí; la única pregunta es si serás de los que la dominaron desde el principio… o de los que la persiguieron desde atrás. <b>Los $50 deciden de qué lado vas a estar.</b></p>
+    <p class="ps"><b>P.D.</b> La IA no va a esperar a que estés listo. Dentro de un año vas a estar usándola sí o sí; la única pregunta es si serás de los que la dominaron desde el principio… o de los que la persiguieron desde atrás. <b>Los $50 deciden de qué lado vas a estar.</b></p>
   </div>
 </section>
 
