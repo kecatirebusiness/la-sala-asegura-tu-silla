@@ -1293,7 +1293,14 @@
         if(!clientSecret){ var r=await fetch('/api/create-checkout-session',{method:'POST'}); if(!r.ok) throw 0; var d=await r.json(); clientSecret=d.clientSecret; if(!clientSecret) throw 0; }
         overlay.classList.add('open'); lock();
         if(!checkout && !mounting){ mounting=true; checkout=await stripe.initEmbeddedCheckout({clientSecret:clientSecret}); checkout.mount('#checkout'); mounting=false; }
-      }catch(err){ window.location.href=PAYMENT_LINK; }
+      }catch(err){ openStripePopup(); }
+    }
+    // Fallback sin backend: ventana flotante centrada encima de la landing
+    function openStripePopup(){
+      var w=480, h=820;
+      var y=Math.max(0,((screen.height||900)-h)/2), x=Math.max(0,((screen.width||1200)-w)/2);
+      var win=window.open(PAYMENT_LINK,'lasala_pay','width='+w+',height='+h+',top='+y+',left='+x+',resizable=yes,scrollbars=yes');
+      if(!win){ window.location.href=PAYMENT_LINK; } // si el navegador bloquea el popup
     }
     document.querySelectorAll('.js-reserve').forEach(function(b){
       b.setAttribute('href',PAYMENT_LINK);
