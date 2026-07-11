@@ -497,6 +497,58 @@
     #scrollbar{transition:none}
     .seats-fill{animation:none;width:54.6%}
   }
+
+  /* ===== HERO headline v2 ===== */
+  .hero-h1{display:flex;flex-direction:column;gap:4px;max-width:840px;margin:0 auto;letter-spacing:-.03em}
+  .h1-top{font-size:25px;font-weight:600;color:var(--muted);letter-spacing:-.01em}
+  .h1-hero{font-size:58px;font-weight:800;line-height:1.0;color:#fff}
+  .h1-hero em{font-style:italic;font-weight:700;color:var(--green)}
+  .hero-lead{font-size:16.5px;color:var(--text);margin:20px auto 0;max-width:520px;line-height:1.5}
+  .hero-chips{display:flex;flex-wrap:wrap;gap:9px;justify-content:center;margin:24px auto 0}
+  .hero-chips span{display:inline-flex;align-items:center;gap:7px;font-size:12.5px;font-weight:600;color:var(--text);background:var(--panel-2);border:1px solid var(--border);padding:8px 14px;border-radius:999px}
+  .hero-chips svg{width:13px;height:13px;color:var(--green);flex-shrink:0}
+
+  /* ===== ventana de terminal reutilizable (secciones) ===== */
+  .term-win{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:rgba(6,16,11,.74);max-width:680px;margin:8px auto 0;text-align:left;box-shadow:0 30px 70px -40px rgba(0,0,0,.7)}
+  .tw-body{padding:16px 18px 18px;font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:12.8px;line-height:1.75}
+  .tw-cmd{color:var(--core);margin-bottom:8px}
+  .tw-line{display:flex;gap:10px;padding:3px 0}
+  .tw-line span:last-child{word-break:break-word}
+  .tw-mark{flex-shrink:0;font-weight:700}
+  .tw-line.warn{color:#e7dcc2}.tw-line.warn .tw-mark{color:var(--warn)}
+  .tw-line.err{color:#f1d4cf}.tw-line.err .tw-mark{color:var(--danger)}
+  .tw-line.ok{color:#d3eadd}.tw-line.ok .tw-mark{color:var(--green)}
+  .tw-line.dim{color:var(--muted)}.tw-line.dim .tw-mark{color:var(--muted)}
+  .tw-line b{color:#fff;font-weight:700}
+  .tw-line.ok b{color:var(--core)}
+  .tw-sep{height:1px;background:var(--border);margin:11px 0}
+
+  /* ===== ecosistema · hub animado ===== */
+  .eco{max-width:600px;margin:6px auto 0}
+  .eco svg{width:100%;height:auto;display:block;overflow:visible}
+  .eco-line{stroke:rgba(34,197,94,.22);stroke-width:1.5;fill:none}
+  .eco-pulse{fill:var(--core);filter:drop-shadow(0 0 5px rgba(52,211,153,.9))}
+  .eco-node > circle{fill:rgba(8,20,14,.95);stroke:rgba(255,255,255,.14);stroke-width:1.4}
+  .eco-node text{text-anchor:middle;fill:var(--text);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;font-size:12.5px;font-weight:700}
+  .eco-node .sub{fill:var(--muted);font-size:9px;font-weight:600}
+  .eco-hub > circle{fill:rgba(34,197,94,.14);stroke:rgba(34,197,94,.65);stroke-width:2}
+  .eco-hub text{fill:var(--green);font-size:17px;font-weight:800}
+  .eco-hub .sub{fill:rgba(159,233,192,.75);font-size:9.5px}
+  .eco-ring{fill:none;stroke:rgba(34,197,94,.5);stroke-width:1.5;transform-origin:center;transform-box:fill-box;animation:ecoRing 2.8s ease-out infinite}
+  @keyframes ecoRing{0%{transform:scale(.75);opacity:.7}100%{transform:scale(1.5);opacity:0}}
+
+  @media(max-width:760px){
+    .hero-h1{gap:3px}
+    .h1-top{font-size:18px}
+    .h1-hero{font-size:35px;line-height:1.04}
+    .hero-lead{font-size:15px;margin-top:16px;max-width:340px}
+    .hero-chips{gap:7px;margin-top:18px}
+    .hero-chips span{font-size:11.5px;padding:7px 12px}
+    .term-win{border-radius:11px}
+    .tw-body{font-size:12px;padding:14px 15px 16px;line-height:1.7}
+    .eco{margin-top:2px}
+  }
+  @media(prefers-reduced-motion:reduce){.eco-pulse{display:none}.eco-ring{animation:none;opacity:0}}
 </style>
 </head>
 <body>
@@ -537,14 +589,22 @@
   <div class="hero-fx" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="wrap genwrap">
     <div class="eyebrow"><span class="dot-pulse"></span> La Sala de IA · primera Generación</div>
-    <h1 style="margin-bottom:0">La IA no te va a reemplazar. <em>Te va a multiplicar.</em></h1>
-    <p class="thesis" style="margin-top:18px">6 semanas para dominar Claude y la IA aplicada a tu negocio.<br>Sin salir en cámara, sin contratar un ejército.</p>
+    <h1 class="hero-h1">
+      <span class="h1-top">La IA no te va a reemplazar.</span>
+      <span class="h1-hero">Te va a <em>multiplicar</em>.</span>
+    </h1>
+    <p class="hero-lead">Domina Claude y la IA aplicada a tu negocio en 6 semanas, con acompañamiento en vivo.</p>
+    <div class="hero-chips">
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg> En vivo, en grupo</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg> Empiezas desde cero</span>
+      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg> Sin salir en cámara</span>
+    </div>
 
     <div class="gen-id">
       <div class="gen-eyebrow">Tu cohort se llama</div>
       <div class="gen-mega"><span class="y">GEN</span><span class="num">·01</span></div>
       <div class="gen-rule reveal"></div>
-      <p class="gen-sub reveal">No es un curso suelto: es una <b>Generación</b> que arranca junta, avanza junta y se gradúa junta. Tú serías de la <b>primera.</b></p>
+      <p class="gen-sub reveal">No entras a un curso: entras a una <b>Generación</b>. Arrancan el mismo día, avanzan juntos las 6 semanas y se gradúan juntos. Tú serías de la <b>primera.</b></p>
     </div>
 
     <div class="genflow">
@@ -688,13 +748,19 @@
     <div class="sec-label reveal" style="color:var(--danger)">La verdad incómoda</div>
     <h2 class="reveal">Cada mes que dudas, <em>la brecha se hace más grande.</em></h2>
     <p class="sec-intro reveal">No es que te falte tiempo. Es que estás haciendo a mano lo que tu competencia ya delegó a la IA, y ese tiempo no vuelve.</p>
-    <div class="loss-grid">
-      <div class="loss reveal"><span class="x">✕</span><p>Pasas <b>horas en tareas</b> que la IA resuelve en minutos: emails, propuestas, contenido, admin.</p></div>
-      <div class="loss reveal"><span class="x">✕</span><p>Pagas por <b>software, freelancers o un asistente</b> que un buen hub de IA reemplaza.</p></div>
-      <div class="loss reveal"><span class="x">✕</span><p>Ves a otros <b>cobrar por servicios de IA</b> y sientes que el tren se te va sin haberte subido.</p></div>
-      <div class="loss reveal"><span class="x">✕</span><p>Abriste ChatGPT, no supiste qué pedirle, y <b>lo cerraste pensando "esto no es para mí".</b></p></div>
+    <div class="term-win reveal">
+      <div class="tbar"><span class="td r"></span><span class="td y"></span><span class="td g"></span><span class="tbar-title">diagnostico.sh</span></div>
+      <div class="tw-body">
+        <div class="tw-cmd">$ diagnostico --tu-negocio</div>
+        <div class="tw-line warn"><span class="tw-mark">⚠</span><span>Pasas <b>horas en tareas</b> que la IA hace en minutos: emails, propuestas, contenido, admin.</span></div>
+        <div class="tw-line warn"><span class="tw-mark">⚠</span><span>Pagas <b>software, freelancers o un asistente</b> que un buen hub de IA reemplaza.</span></div>
+        <div class="tw-line warn"><span class="tw-mark">⚠</span><span>Ves a otros <b>cobrar por servicios de IA</b> y sientes que el tren se va sin ti.</span></div>
+        <div class="tw-line err"><span class="tw-mark">✕</span><span>Abriste ChatGPT, no supiste qué pedirle y lo cerraste: <b>“esto no es para mí”.</b></span></div>
+        <div class="tw-sep"></div>
+        <div class="tw-line dim"><span class="tw-mark">›</span><span>Brecha hoy: <b>meses</b>. En 12 meses: <b>años de ventaja</b>.</span></div>
+        <div class="tw-line ok"><span class="tw-mark">✓</span><span>Solución: <b>6 semanas</b>, si alguien te lleva de la mano.</span></div>
+      </div>
     </div>
-    <p class="gap-line reveal">La diferencia entre quien usa IA y quien no, hoy son meses. <b>En 12 meses serán años de ventaja.</b> La buena noticia: cerrar esa brecha toma 6 semanas, si alguien te lleva de la mano.</p>
   </div>
 </section>
 
@@ -869,13 +935,29 @@
     <div class="sec-label reveal">Las herramientas que vas a dominar</div>
     <h2 class="reveal">Todo el ecosistema, conectado a un solo cerebro.</h2>
     <p class="sec-intro reveal">No aprendes herramientas sueltas: aprendes a orquestarlas desde tu hub de Claude.</p>
-    <div class="stack">
-      <div class="tool claude reveal"><div class="tn">Claude</div><div class="td">tu hub central</div></div>
-      <div class="tool reveal"><div class="tn">Claude Projects</div><div class="td">tu espacio de trabajo</div></div>
-      <div class="tool reveal"><div class="tn">Higgsfield</div><div class="td">imagen + video IA</div></div>
-      <div class="tool reveal"><div class="tn">HeyGen</div><div class="td">avatares IA</div></div>
-      <div class="tool reveal"><div class="tn">ElevenLabs</div><div class="td">voz IA realista</div></div>
-      <div class="tool reveal"><div class="tn">Cowork · Claude Code</div><div class="td">automatización</div></div>
+    <div class="eco reveal">
+      <svg viewBox="0 0 600 400" role="img" aria-label="Claude como hub central conectado a Higgsfield, HeyGen, ElevenLabs, Cowork y Projects">
+        <!-- líneas -->
+        <line class="eco-line" x1="300" y1="200" x2="300" y2="52"/>
+        <line class="eco-line" x1="300" y1="200" x2="505" y2="128"/>
+        <line class="eco-line" x1="300" y1="200" x2="470" y2="330"/>
+        <line class="eco-line" x1="300" y1="200" x2="130" y2="330"/>
+        <line class="eco-line" x1="300" y1="200" x2="95" y2="128"/>
+        <!-- pulsos (bombeo desde Claude) -->
+        <circle class="eco-pulse" r="4"><animateMotion dur="1.8s" repeatCount="indefinite" begin="0s" path="M300,200L300,52"/></circle>
+        <circle class="eco-pulse" r="4"><animateMotion dur="1.8s" repeatCount="indefinite" begin="0.36s" path="M300,200L505,128"/></circle>
+        <circle class="eco-pulse" r="4"><animateMotion dur="1.8s" repeatCount="indefinite" begin="0.72s" path="M300,200L470,330"/></circle>
+        <circle class="eco-pulse" r="4"><animateMotion dur="1.8s" repeatCount="indefinite" begin="1.08s" path="M300,200L130,330"/></circle>
+        <circle class="eco-pulse" r="4"><animateMotion dur="1.8s" repeatCount="indefinite" begin="1.44s" path="M300,200L95,128"/></circle>
+        <!-- satélites -->
+        <g class="eco-node"><circle cx="300" cy="52" r="38"/><text x="300" y="50">Projects</text><text class="sub" x="300" y="65">tu espacio</text></g>
+        <g class="eco-node"><circle cx="505" cy="128" r="38"/><text x="505" y="126">Higgsfield</text><text class="sub" x="505" y="141">imagen · video</text></g>
+        <g class="eco-node"><circle cx="470" cy="330" r="38"/><text x="470" y="328">HeyGen</text><text class="sub" x="470" y="343">avatares</text></g>
+        <g class="eco-node"><circle cx="130" cy="330" r="38"/><text x="130" y="328">ElevenLabs</text><text class="sub" x="130" y="343">voz IA</text></g>
+        <g class="eco-node"><circle cx="95" cy="128" r="38"/><text x="95" y="126">Cowork</text><text class="sub" x="95" y="141">automatiza</text></g>
+        <!-- hub Claude -->
+        <g class="eco-hub"><circle class="eco-ring" cx="300" cy="200" r="50"/><circle cx="300" cy="200" r="50"/><text x="300" y="197">Claude</text><text class="sub" x="300" y="214">tu hub central</text></g>
+      </svg>
     </div>
   </div>
 </section>
@@ -965,16 +1047,17 @@
   <div class="wrap">
     <div class="sec-label reveal">Antes de reservar</div>
     <h2 class="reveal">Lo que todos preguntan.</h2>
-    <div class="sec-intro reveal"></div>
+    <p class="sec-intro reveal">Sin letra chica. Esto es exactamente lo que reservas y cómo funciona.</p>
     <div class="faq">
-      <div class="qa reveal"><div class="q">¿El depósito de $50 es un costo extra? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">No. Es el <b>primer abono</b> de tu inscripción. Se descuenta del total ($375 único o $400 financiado). Solo apartas tu silla antes que el resto.</div></div></div>
-      <div class="qa reveal"><div class="q">¿El depósito se devuelve? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">No. Los <b>$50 no son reembolsables</b>, pero no los pierdes: se descuentan completos de tu inscripción ($375 único o $400 financiado). Es tu compromiso para que la silla quede congelada a tu nombre hasta que abran las puertas.</div></div></div>
-      <div class="qa reveal"><div class="q">No sé nada de IA. ¿Voy a poder? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">Para esto está diseñado. El programa empieza <b>desde cero</b>, asumiendo que nunca has tocado Claude. Construimos tu hub paso a paso y el en vivo existe justo para resolver tus dudas.</div></div></div>
-      <div class="qa reveal"><div class="q">¿Tengo que salir en cámara? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">Para nada. <b>Ninguno de los dos caminos</b> (el dueño que incorpora IA o el proveedor que la vende) necesita cámara. La marca personal a profundidad es un módulo opcional, fuera del cohort.</div></div></div>
-      <div class="qa reveal"><div class="q">¿No tengo negocio todavía, me sirve? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">Sí. Es exactamente el <b>camino del Proveedor:</b> dominas la IA para ofrecerla como servicio a otros negocios. Sales con una habilidad monetizable y un servicio listo para vender.</div></div></div>
-      <div class="qa reveal"><div class="q">¿Y si no puedo asistir a un en vivo? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in"><b>Todo queda grabado</b> en la biblioteca. Puedes verlo a tu ritmo y traer tus dudas al siguiente en vivo. El formato de aula invertida está pensado para gente con poco tiempo.</div></div></div>
-      <div class="qa reveal"><div class="q">¿Cuándo arranca la Generación 01? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">Las puertas abren pronto y todo el cohort arranca <b>sincronizado el mismo día.</b> Los que reservaron con depósito reciben el aviso primero y entran antes que la lista general.</div></div></div>
-      <div class="qa reveal"><div class="q">¿Qué pasa cuando terminan las 6 semanas? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">Te gradúas en el Demo Day y pasas a <b>La Sala</b>: el espacio permanente de todos los graduados, con networking entre generaciones y los recursos vivos. Aquí no sales: aquí se pertenece.</div></div></div>
+      <div class="qa reveal"><div class="q">¿Qué recibo exactamente por mi inversión? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">Las <b>6 semanas del cohort</b> (pregrabados + en vivos), <b>tu hub de Claude</b> montado contigo, el mapa del ecosistema de IA con tu stack, el <b>vault de prompts y plantillas</b>, y <b>La Sala de por vida</b>. Todo el en vivo queda grabado.</div></div></div>
+      <div class="qa reveal"><div class="q">¿El depósito de $50 es un costo extra? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">No. Es tu <b>primer abono</b>: se descuenta del total ($375 pago único o $400 financiado). Con él solo apartas tu silla antes que la lista general.</div></div></div>
+      <div class="qa reveal"><div class="q">¿El depósito se devuelve? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">Te lo digo claro: <b>no, los $50 no son reembolsables</b>. Pero no los pierdes: se abonan completos a tu inscripción. Es tu compromiso para congelar la silla a tu nombre hasta que abran las puertas.</div></div></div>
+      <div class="qa reveal"><div class="q">Empiezo desde cero y no soy técnico. ¿Voy a poder? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">Sí, para eso está diseñado. Arranca <b>desde cero</b>, asumiendo que nunca has tocado Claude. Vamos paso a paso y el en vivo existe justo para resolver tus dudas.</div></div></div>
+      <div class="qa reveal"><div class="q">¿Es en vivo o pregrabado? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">Las dos cosas (aula invertida). Lo <b>pregrabado</b> te prepara a tu ritmo; el <b>en vivo</b> se usa para aplicar, construir y resolver. Si no puedes asistir a un en vivo, <b>queda grabado</b> y traes tus dudas al siguiente.</div></div></div>
+      <div class="qa reveal"><div class="q">¿Tengo que salir en cámara? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">No. <b>Ninguno de los dos caminos</b> (el dueño que incorpora IA o el proveedor que la vende) necesita cámara.</div></div></div>
+      <div class="qa reveal"><div class="q">No tengo negocio todavía. ¿Me sirve? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">Sí. Es el <b>camino del Proveedor</b>: dominas la IA para ofrecerla como servicio a otros negocios. Sales con una habilidad monetizable y un servicio listo para vender.</div></div></div>
+      <div class="qa reveal"><div class="q">¿Cuándo arranca y cómo entro? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">Las puertas abren pronto y todo el cohort arranca <b>sincronizado el mismo día</b>. Quien reservó con depósito recibe el aviso primero y entra antes que la lista general.</div></div></div>
+      <div class="qa reveal"><div class="q">¿Qué pasa cuando terminan las 6 semanas? <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg></div><div class="a"><div class="a-in">Te gradúas en el <b>Demo Day</b> y pasas a <b>La Sala</b>: el espacio permanente de todos los graduados, con networking entre generaciones y recursos vivos. Aquí no sales: se pertenece.</div></div></div>
     </div>
   </div>
 </section>
