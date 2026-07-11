@@ -549,6 +549,32 @@
     .eco{margin-top:2px}
   }
   @media(prefers-reduced-motion:reduce){.eco-pulse{display:none}.eco-ring{animation:none;opacity:0}}
+
+  /* ===== CLÍMAX DEL EMBUDO · Aparta tu lugar ===== */
+  #asegurar{position:relative;overflow:hidden}
+  #asegurar > .wrap{position:relative;z-index:1}
+  .stage-glow{position:absolute;left:50%;top:-30px;transform:translateX(-50%);width:min(940px,130vw);height:660px;background:radial-gradient(circle at 50% 30%,rgba(34,197,94,.20),transparent 62%);pointer-events:none;z-index:0;animation:stagePulse 5s ease-in-out infinite}
+  @keyframes stagePulse{0%,100%{opacity:.6}50%{opacity:1}}
+  /* puente / conector de embudo */
+  .funnel-bridge{display:flex;flex-direction:column;align-items:center;gap:11px;margin:-14px auto 30px}
+  .fb-line{width:2px;height:46px;background:linear-gradient(180deg,transparent,var(--green));border-radius:2px}
+  .fb-txt{font-size:12.5px;color:var(--muted);font-weight:600}
+  .fb-txt b{color:var(--text)}
+  .fb-arrow{width:20px;height:20px;color:var(--green);animation:fbBounce 1.6s ease-in-out infinite}
+  @keyframes fbBounce{0%,100%{transform:translateY(-2px)}50%{transform:translateY(5px)}}
+  /* halo animado alrededor de la tarjeta */
+  .deposit-frame{position:relative;max-width:480px;margin:8px auto 0}
+  .deposit-frame::before{content:"";position:absolute;inset:-16px;border-radius:36px;background:conic-gradient(from 0deg,transparent 0deg,rgba(34,197,94,.6) 45deg,rgba(52,211,153,.75) 85deg,transparent 150deg,transparent 360deg);filter:blur(15px);opacity:.7;z-index:0;animation:spinGlow 5.5s linear infinite}
+  .deposit-frame > .deposit{position:relative;z-index:1;max-width:none;margin:0}
+  @keyframes spinGlow{to{transform:rotate(360deg)}}
+  .dep-live .lv-dot{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--green);margin-right:6px;box-shadow:0 0 0 0 rgba(34,197,94,.6);animation:pulse 1.8s infinite;vertical-align:middle}
+  @media(prefers-reduced-motion:reduce){.stage-glow,.fb-arrow,.deposit-frame::before,.dep-live .lv-dot{animation:none}.deposit-frame::before{opacity:.5}}
+  @media(max-width:760px){
+    .deposit-frame{max-width:none}
+    .deposit-frame::before{inset:-10px;border-radius:30px;filter:blur(11px)}
+    .funnel-bridge{margin:-6px auto 24px}
+    .fb-line{height:38px}
+  }
 </style>
 </head>
 <body>
@@ -648,16 +674,23 @@
 
 <!-- ===== ASEGURA TU SILLA (deposit CTA) ===== -->
 <section id="asegurar">
+  <div class="stage-glow" aria-hidden="true"></div>
   <div class="wrap">
+    <div class="funnel-bridge reveal">
+      <span class="fb-line"></span>
+      <span class="fb-txt">Ya sabes qué es. <b>Ahora es tu turno.</b></span>
+      <svg class="fb-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>
+    </div>
     <div class="sec-label reveal">Aparta tu lugar</div>
     <h2 class="reveal">Asegura tu silla en la <em>Gen 01.</em></h2>
-    <p class="sec-intro reveal">Las puertas abren pronto y los 75 asientos se reparten por orden de reserva. Apártalo hoy con un depósito que se abona a tu inscripción.</p>
+    <p class="sec-intro reveal">Ya viste qué es y cómo funciona. Los 75 asientos se reparten por orden de reserva. Apártalo hoy con un depósito que se abona completo a tu inscripción.</p>
 
     <!-- DEPOSIT CARD -->
-    <div class="deposit reveal">
+    <div class="deposit-frame reveal">
+      <div class="deposit">
       <div class="dep-top">
         <span class="dep-tag"><span class="dot-pulse"></span> Acceso anticipado</span>
-        <span class="dep-live"><b>17</b> reservando ahora</span>
+        <span class="dep-live"><span class="lv-dot"></span><b>17</b> reservando ahora</span>
       </div>
 
       <div class="dep-price">
@@ -694,6 +727,7 @@
       <div class="dep-secure">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="4" y="10" width="16" height="11" rx="2"/><path d="M8 10V7a4 4 0 018 0v3"/></svg>
         Pago 100% seguro vía Stripe · Visa, Mastercard, Apple Pay
+      </div>
       </div>
     </div>
 
