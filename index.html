@@ -288,12 +288,17 @@
   .gtwo h4{font-size:18px;margin-bottom:9px} .gtwo p{font-size:13.5px;color:var(--muted);line-height:1.55}
 
   /* FOUNDERS */
-  .founders{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;max-width:840px;margin:0 auto}
-  .founder{text-align:center}
-  .founder .ph{width:104px;height:104px;border-radius:50%;margin:0 auto 16px;object-fit:cover;display:block;background:linear-gradient(135deg,var(--green),var(--core));color:#04240f;font-size:34px;font-weight:800;line-height:104px;box-shadow:0 16px 40px -16px rgba(34,197,94,.5)}
-  .founder h4{font-size:18px}
-  .founder .role{font-size:12px;color:var(--green);font-weight:700;text-transform:uppercase;letter-spacing:.06em;margin:4px 0 12px}
-  .founder p{font-size:13.5px;color:var(--muted);line-height:1.6}
+  .founders{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:920px;margin:0 auto}
+  .founder{background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012));border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:transform .22s ease,border-color .22s,box-shadow .22s}
+  .founder:hover{transform:translateY(-5px);border-color:rgba(34,197,94,.34);box-shadow:0 34px 64px -34px rgba(34,197,94,.5)}
+  .f-media{position:relative;aspect-ratio:4/5;overflow:hidden;background:#04120b}
+  .f-media .ph{width:100%;height:100%;object-fit:cover;display:block}
+  .f-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,17,9,0) 40%,rgba(7,17,9,.55) 72%,rgba(7,17,9,.95) 100%);pointer-events:none}
+  .f-tag{position:absolute;top:12px;left:12px;z-index:2;font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--green);background:rgba(4,18,12,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(34,197,94,.3);padding:5px 11px;border-radius:999px}
+  .f-name{position:absolute;left:17px;right:17px;bottom:15px;z-index:2}
+  .f-name h4{font-size:20px;font-weight:700;line-height:1.08;color:#fff;letter-spacing:-.01em}
+  .f-name .role{font-size:11px;color:var(--core);font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-top:6px}
+  .founder>p{font-size:13px;color:var(--muted);line-height:1.6;padding:16px 18px 20px;margin:0}
   .founders-note{text-align:center;font-size:14px;color:var(--muted);max-width:560px;margin:34px auto 0;line-height:1.6}
   .founders-note b{color:var(--text)}
 
@@ -349,8 +354,16 @@
     .gen-two{grid-template-columns:1fr;gap:14px;max-width:440px;margin-top:32px}
     .gtwo{padding:22px 22px}
     .gen-mega{font-size:clamp(96px,30vw,160px)}
-    .founders{grid-template-columns:1fr;gap:30px;max-width:340px}
-    .founder .ph{width:96px;height:96px;line-height:96px;font-size:32px}
+    /* founders → tarjetas horizontales compactas en móvil */
+    .founders{grid-template-columns:1fr;gap:12px;max-width:440px}
+    .founder{display:flex;min-height:186px}
+    .f-media{width:150px;flex-shrink:0;aspect-ratio:auto}
+    .f-media .ph{height:100%}
+    .f-tag{top:9px;left:9px;font-size:8.5px;letter-spacing:.06em;padding:4px 8px}
+    .f-name{left:11px;right:11px;bottom:10px}
+    .f-name h4{font-size:16px}
+    .f-name .role{font-size:9.5px;margin-top:3px}
+    .founder>p{flex:1;display:flex;align-items:center;font-size:12.5px;line-height:1.55;padding:14px 16px}
     .loss-grid{gap:2px 0;max-width:420px}
     .loss{padding:13px 4px}
     .gap-line{font-size:17px;margin-top:28px}
@@ -524,21 +537,27 @@
     <p class="sec-intro">La Gen 01 la guiamos los tres socios de La Sala. Nada de teoría grabada y desaparecer. Estamos en los en vivos, resolviendo tu caso.</p>
     <div class="founders">
       <div class="founder">
-        <div class="ph">K</div>
-        <h4>Kevin</h4>
-        <div class="role">Claude · sistemas de IA</div>
+        <div class="f-media">
+          <img class="ph" src="img/kevin.jpg" alt="Kevin, co-fundador de La Sala de IA" loading="lazy" style="object-position:52% 16%">
+          <span class="f-tag">Co-fundador</span>
+          <div class="f-name"><h4>Kevin</h4><div class="role">Claude · sistemas de IA</div></div>
+        </div>
         <p>[Bio corta de Kevin: qué haces, por qué dominas Claude y la IA aplicada al negocio. 2 a 3 líneas.]</p>
       </div>
       <div class="founder">
-        <div class="ph">M</div>
-        <h4>Manu</h4>
-        <div class="role">[su rol]</div>
-        <p>[Bio corta de Manu: su fuerte, su experiencia, qué aporta al cohort. 2 a 3 líneas.]</p>
+        <div class="f-media">
+          <img class="ph" src="img/manuel.jpg" alt="Manuel, co-fundador de La Sala de IA" loading="lazy" style="object-position:50% 28%">
+          <span class="f-tag">Co-fundador</span>
+          <div class="f-name"><h4>Manuel</h4><div class="role">[su rol]</div></div>
+        </div>
+        <p>[Bio corta de Manuel: su fuerte, su experiencia, qué aporta al cohort. 2 a 3 líneas.]</p>
       </div>
       <div class="founder">
-        <div class="ph">E</div>
-        <h4>Elsa</h4>
-        <div class="role">Co-host en vivo</div>
+        <div class="f-media">
+          <img class="ph" src="img/elsa.jpg" alt="Elsa, co-host en vivo de La Sala de IA" loading="lazy" style="object-position:50% 20%">
+          <span class="f-tag">Co-host en vivo</span>
+          <div class="f-name"><h4>Elsa</h4><div class="role">Construcción en directo</div></div>
+        </div>
         <p>[Bio corta de Elsa: su rol en los en vivos y qué aporta. 2 a 3 líneas.]</p>
       </div>
     </div>
