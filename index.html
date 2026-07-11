@@ -286,9 +286,14 @@
   .gf p{font-size:13px;color:var(--muted);line-height:1.5}
 
   .gen-two{display:grid;grid-template-columns:1fr 1fr;gap:18px;max-width:760px;margin:56px auto 0;text-align:left}
-  .gtwo{border-radius:22px;padding:26px 28px}
-  .gtwo.cohort{background:radial-gradient(420px 300px at 30% 0%,rgba(34,197,94,.12),transparent)}
-  .gtwo.sala{background:radial-gradient(420px 300px at 30% 0%,rgba(185,139,240,.11),transparent)}
+  .gtwo{border-radius:20px;padding:26px 26px;border:1px solid var(--border);position:relative;overflow:hidden;transition:transform .2s ease,border-color .2s}
+  .gtwo.cohort{background:linear-gradient(180deg,rgba(34,197,94,.06),rgba(255,255,255,.008)),radial-gradient(420px 300px at 30% 0%,rgba(34,197,94,.12),transparent);border-color:rgba(34,197,94,.2)}
+  .gtwo.sala{background:linear-gradient(180deg,rgba(185,139,240,.06),rgba(255,255,255,.008)),radial-gradient(420px 300px at 30% 0%,rgba(185,139,240,.11),transparent);border-color:rgba(185,139,240,.2)}
+  .gtwo:hover{transform:translateY(-3px)}
+  .gtwo-ic{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:15px}
+  .gtwo.cohort .gtwo-ic{background:var(--green-soft);color:var(--green)}
+  .gtwo.sala .gtwo-ic{background:rgba(185,139,240,.13);color:var(--opt)}
+  .gtwo-ic svg{width:20px;height:20px}
   .gtwo .gk{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;margin-bottom:9px}
   .gtwo.cohort .gk{color:var(--green)} .gtwo.sala .gk{color:var(--opt)}
   .gtwo h4{font-size:18px;margin-bottom:9px} .gtwo p{font-size:13.5px;color:var(--muted);line-height:1.55}
@@ -357,8 +362,12 @@
     .gf h4{grid-column:2;grid-row:1;align-self:center;font-size:16px}
     .gf p{grid-column:2;grid-row:2;font-size:13px}
     .gen-two{grid-template-columns:1fr;gap:14px;max-width:440px;margin-top:44px}
-    .gtwo{padding:22px 22px}
-    .gen-mega{font-size:clamp(96px,30vw,160px)}
+    .gtwo{padding:24px 22px}
+    .gtwo-ic{width:38px;height:38px;border-radius:11px;margin-bottom:13px}
+    .gen-eyebrow{font-size:11px;letter-spacing:.2em}
+    .gen-mega{font-size:clamp(90px,29vw,150px)}
+    .gen-rule{margin-top:26px}
+    .gen-sub{font-size:15px;line-height:1.66;margin-top:20px}
     /* founders → tarjetas horizontales compactas en móvil */
     .founders{grid-template-columns:1fr;gap:12px;max-width:440px}
     .founder{display:flex;flex-direction:row;align-items:stretch}
@@ -508,11 +517,13 @@
 
     <div class="gen-two">
       <div class="gtwo cohort reveal">
+        <div class="gtwo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
         <div class="gk">Espacio temporal · 6 semanas</div>
         <h4>El cohort activo</h4>
         <p>Donde vive tu Generación durante el programa: los en vivos, la construcción de las marcas, las dudas resueltas, la energía del grupo. Cuando termina, sales del cohort, pero no de La Sala.</p>
       </div>
       <div class="gtwo sala reveal">
+        <div class="gtwo-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/><path d="M9 20v-6h6v6"/></svg></div>
         <div class="gk">Espacio permanente · de por vida</div>
         <h4>La Sala</h4>
         <p>La casa de todas las Generaciones. Networking entre cohorts, recursos vivos, perks de graduado. Aquí la Gen 01 inspira a la Gen 02. Aquí nadie sale: aquí se pertenece.</p>
