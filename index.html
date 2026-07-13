@@ -230,12 +230,11 @@
   /* LOGO MARQUEE */
   .logo-strip{margin-top:40px}
   .logo-strip-cap{text-align:center;font-size:11.5px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:24px}
-  .logo-marquee{position:relative;width:100vw;margin-left:calc(50% - 50vw);overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
-  .logo-track{display:flex;align-items:center;width:max-content;animation:logoscroll 46s linear infinite}
+  .logo-marquee{position:relative;width:100vw;margin-left:calc(50% - 50vw);overflow:hidden;contain:content;-webkit-mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent);mask-image:linear-gradient(90deg,transparent,#000 9%,#000 91%,transparent)}
+  .logo-track{display:flex;align-items:center;width:max-content;animation:logoscroll 30s linear infinite;will-change:transform;backface-visibility:hidden;transform:translateZ(0)}
   .logo-marquee:hover .logo-track{animation-play-state:paused}
-  .logo-track img{height:32px;width:auto;margin-right:66px;flex-shrink:0;opacity:.7;filter:grayscale(.2);transition:opacity .25s ease,filter .25s ease}
-  .logo-track img:hover{opacity:1;filter:none}
-  @keyframes logoscroll{to{transform:translateX(-50%)}}
+  .logo-track img{height:32px;width:auto;margin-right:66px;flex-shrink:0;opacity:.7;filter:grayscale(.2);transition:opacity .25s ease,filter .25s ease;-webkit-user-drag:none;user-select:none;pointer-events:none}
+  @keyframes logoscroll{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
 
   /* VALUE STACK */
   .vstack{max-width:580px;margin:0 auto}
@@ -717,26 +716,26 @@
       <div class="logo-strip-cap">El stack que vas a dominar — y sigue creciendo</div>
       <div class="logo-marquee">
         <div class="logo-track">
-          <img src="img/logos/claude.png" alt="Claude" loading="lazy">
-          <img src="img/logos/chatgpt.png" alt="ChatGPT" loading="lazy">
-          <img src="img/logos/gemini.png" alt="Gemini" loading="lazy">
-          <img src="img/logos/higgsfield.png" alt="Higgsfield" loading="lazy">
-          <img src="img/logos/heygen.png" alt="HeyGen" loading="lazy">
-          <img src="img/logos/elevenlabs.png" alt="ElevenLabs" loading="lazy">
-          <img src="img/logos/cowork.png" alt="Claude Cowork" loading="lazy">
-          <img src="img/logos/claude-code.png" alt="Claude Code" loading="lazy">
-          <img src="img/logos/lovable.png" alt="Lovable" loading="lazy">
-          <img src="img/logos/manychat.png" alt="Manychat" loading="lazy">
-          <img src="img/logos/claude.png" alt="" aria-hidden="true" loading="lazy">
-          <img src="img/logos/chatgpt.png" alt="" aria-hidden="true" loading="lazy">
-          <img src="img/logos/gemini.png" alt="" aria-hidden="true" loading="lazy">
-          <img src="img/logos/higgsfield.png" alt="" aria-hidden="true" loading="lazy">
-          <img src="img/logos/heygen.png" alt="" aria-hidden="true" loading="lazy">
-          <img src="img/logos/elevenlabs.png" alt="" aria-hidden="true" loading="lazy">
-          <img src="img/logos/cowork.png" alt="" aria-hidden="true" loading="lazy">
-          <img src="img/logos/claude-code.png" alt="" aria-hidden="true" loading="lazy">
-          <img src="img/logos/lovable.png" alt="" aria-hidden="true" loading="lazy">
-          <img src="img/logos/manychat.png" alt="" aria-hidden="true" loading="lazy">
+          <img src="img/logos/claude.png" alt="Claude" width="154" height="32" decoding="async">
+          <img src="img/logos/chatgpt.png" alt="ChatGPT" width="112" height="32" decoding="async">
+          <img src="img/logos/gemini.png" alt="Gemini" width="87" height="32" decoding="async">
+          <img src="img/logos/higgsfield.png" alt="Higgsfield" width="163" height="32" decoding="async">
+          <img src="img/logos/heygen.png" alt="HeyGen" width="142" height="32" decoding="async">
+          <img src="img/logos/elevenlabs.png" alt="ElevenLabs" width="64" height="32" decoding="async">
+          <img src="img/logos/cowork.png" alt="Claude Cowork" width="79" height="32" decoding="async">
+          <img src="img/logos/claude-code.png" alt="Claude Code" width="59" height="32" decoding="async">
+          <img src="img/logos/lovable.png" alt="Lovable" width="186" height="32" decoding="async">
+          <img src="img/logos/manychat.png" alt="Manychat" width="180" height="32" decoding="async">
+          <img src="img/logos/claude.png" alt="" aria-hidden="true" width="154" height="32" decoding="async">
+          <img src="img/logos/chatgpt.png" alt="" aria-hidden="true" width="112" height="32" decoding="async">
+          <img src="img/logos/gemini.png" alt="" aria-hidden="true" width="87" height="32" decoding="async">
+          <img src="img/logos/higgsfield.png" alt="" aria-hidden="true" width="163" height="32" decoding="async">
+          <img src="img/logos/heygen.png" alt="" aria-hidden="true" width="142" height="32" decoding="async">
+          <img src="img/logos/elevenlabs.png" alt="" aria-hidden="true" width="64" height="32" decoding="async">
+          <img src="img/logos/cowork.png" alt="" aria-hidden="true" width="79" height="32" decoding="async">
+          <img src="img/logos/claude-code.png" alt="" aria-hidden="true" width="59" height="32" decoding="async">
+          <img src="img/logos/lovable.png" alt="" aria-hidden="true" width="186" height="32" decoding="async">
+          <img src="img/logos/manychat.png" alt="" aria-hidden="true" width="180" height="32" decoding="async">
         </div>
       </div>
     </div>
