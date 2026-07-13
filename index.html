@@ -238,7 +238,10 @@
   .pcard .tag{position:absolute;top:-11px;left:50%;transform:translateX(-50%);font-size:10.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:4px 12px;border-radius:999px;background:var(--green);color:#04240f}
   .pcard .pk{font-size:12px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin-bottom:12px}
   .pcard .pprice{font-size:44px;font-weight:700;letter-spacing:-.03em} .pcard.full .pprice{color:var(--green)}
-  .pcard .pdesc{font-size:13.5px;color:var(--muted);margin-top:10px;line-height:1.5}
+  .pcard .pweek{display:inline-flex;align-items:center;gap:6px;margin-top:13px;font-size:12px;font-weight:700;color:var(--core);background:rgba(52,211,153,.1);border:1px solid rgba(52,211,153,.24);padding:5px 13px;border-radius:999px;letter-spacing:.005em}
+  .pcard.fin .pweek{color:var(--rec);background:rgba(91,168,245,.1);border-color:rgba(91,168,245,.24)}
+  .pcard .pweek b{font-weight:800}
+  .pcard .pdesc{font-size:13.5px;color:var(--muted);margin-top:12px;line-height:1.5}
   .pay-note{font-size:14px;color:var(--muted);text-align:center;margin:26px auto 0;max-width:540px;line-height:1.6}
   .pay-note b{color:var(--text)}
 
@@ -329,8 +332,13 @@
   .founders{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;max-width:920px;margin:0 auto}
   .founder{display:flex;flex-direction:column;background:linear-gradient(180deg,rgba(255,255,255,.045),rgba(255,255,255,.012));border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:transform .22s ease,border-color .22s,box-shadow .22s}
   .founder:hover{transform:translateY(-5px);border-color:rgba(34,197,94,.34);box-shadow:0 34px 64px -34px rgba(34,197,94,.5)}
-  .f-media{position:relative;aspect-ratio:4/5;overflow:hidden;background:#04120b;flex-shrink:0}
-  .f-media .ph{width:100%;height:100%;object-fit:cover;display:block}
+  .f-media{position:relative;display:block;aspect-ratio:4/5;overflow:hidden;background:#04120b;flex-shrink:0;text-decoration:none;cursor:pointer}
+  .f-media .ph{width:100%;height:100%;object-fit:cover;display:block;transition:transform .45s ease}
+  .f-media:hover .ph{transform:scale(1.05)}
+  .ig-badge{position:absolute;top:12px;right:12px;z-index:3;width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:rgba(4,18,12,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(255,255,255,.2);transition:background .2s,transform .2s,border-color .2s}
+  .f-media:hover .ig-badge{background:var(--green);border-color:var(--green);transform:scale(1.1)}
+  .ig-badge svg{width:16px;height:16px;color:#fff}
+  .founders-h2 em{display:block}
   .f-media::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(7,17,9,0) 40%,rgba(7,17,9,.55) 72%,rgba(7,17,9,.95) 100%);pointer-events:none}
   .f-tag{position:absolute;top:12px;left:12px;z-index:2;font-size:10px;font-weight:700;letter-spacing:.09em;text-transform:uppercase;color:var(--green);background:rgba(4,18,12,.55);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);border:1px solid rgba(34,197,94,.3);padding:5px 11px;border-radius:999px}
   .f-name{position:absolute;left:18px;right:18px;bottom:15px;z-index:2;text-align:left}
@@ -401,6 +409,8 @@
     .f-media{width:144px;flex-shrink:0;aspect-ratio:3/4;align-self:center}
     .f-media .ph{height:100%}
     .f-tag{top:9px;left:9px;font-size:8.5px;letter-spacing:.06em;padding:4px 8px}
+    .ig-badge{top:9px;right:9px;width:26px;height:26px}
+    .ig-badge svg{width:14px;height:14px}
     .f-name{left:11px;right:11px;bottom:10px}
     .f-name h4{font-size:16px}
     .f-name .role{font-size:9.5px;margin-top:3px}
@@ -526,16 +536,22 @@
   /* ===== ecosistema · hub animado ===== */
   .eco{max-width:600px;margin:6px auto 0}
   .eco svg{width:100%;height:auto;display:block;overflow:visible}
-  .eco-line{stroke:rgba(34,197,94,.22);stroke-width:1.5;fill:none}
-  .eco-pulse{fill:var(--core);filter:drop-shadow(0 0 5px rgba(52,211,153,.9))}
-  .eco-node > circle{fill:rgba(8,20,14,.95);stroke:rgba(255,255,255,.14);stroke-width:1.4}
-  .eco-node text{text-anchor:middle;fill:var(--text);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;font-size:12.5px;font-weight:700}
-  .eco-node .sub{fill:var(--muted);font-size:9px;font-weight:600}
-  .eco-hub > circle{fill:rgba(34,197,94,.14);stroke:rgba(34,197,94,.65);stroke-width:2}
-  .eco-hub text{fill:var(--green);font-size:17px;font-weight:800}
-  .eco-hub .sub{fill:rgba(159,233,192,.75);font-size:9.5px}
-  .eco-ring{fill:none;stroke:rgba(34,197,94,.5);stroke-width:1.5;transform-origin:center;transform-box:fill-box;animation:ecoRing 2.8s ease-out infinite}
-  @keyframes ecoRing{0%{transform:scale(.75);opacity:.7}100%{transform:scale(1.5);opacity:0}}
+  .eco-line{stroke-width:1.6;fill:none;stroke-linecap:round}
+  .eco-pulse{fill:var(--core);filter:drop-shadow(0 0 6px rgba(52,211,153,.95))}
+  .eco-node .nring{fill:url(#nodeFill);stroke:rgba(52,211,153,.32);stroke-width:1.4}
+  .eco-node .glyph{fill:none;stroke:var(--core);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+  .eco-node .glyph .fill{fill:var(--core);stroke:none}
+  .eco-node .glyph.fill *{fill:var(--core);stroke:none}
+  .eco-node .lbl{text-anchor:middle;fill:var(--text);font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display',sans-serif;font-size:13px;font-weight:700;letter-spacing:-.01em}
+  .eco-node .sub{text-anchor:middle;fill:var(--muted);font-size:8.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase}
+  .eco-hub .hub-glow{fill:url(#hubGlow)}
+  .eco-hub .hub-core{fill:url(#hubFill);stroke:rgba(52,211,153,.85);stroke-width:2}
+  .eco-hub .hub-lbl{text-anchor:middle;fill:#eafff1;font-size:19px;font-weight:800;letter-spacing:-.02em}
+  .eco-hub .hub-sub{text-anchor:middle;fill:rgba(159,233,192,.85);font-size:8.5px;font-weight:700;letter-spacing:.09em;text-transform:uppercase}
+  .eco-orbit{fill:none;stroke:rgba(52,211,153,.32);stroke-width:1.1;stroke-dasharray:1.5 9;stroke-linecap:round;transform-box:fill-box;transform-origin:center;animation:ecoSpin 26s linear infinite}
+  .eco-ring{fill:none;stroke:rgba(52,211,153,.55);stroke-width:1.5;transform-box:fill-box;transform-origin:center;animation:ecoRing 3s ease-out infinite}
+  @keyframes ecoRing{0%{transform:scale(.72);opacity:.75}100%{transform:scale(1.5);opacity:0}}
+  @keyframes ecoSpin{to{transform:rotate(360deg)}}
 
   @media(max-width:760px){
     .hero-h1{gap:3px}
@@ -548,7 +564,7 @@
     .tw-body{font-size:12px;padding:14px 15px 16px;line-height:1.7}
     .eco{margin-top:2px}
   }
-  @media(prefers-reduced-motion:reduce){.eco-pulse{display:none}.eco-ring{animation:none;opacity:0}}
+  @media(prefers-reduced-motion:reduce){.eco-pulse{display:none}.eco-ring{animation:none;opacity:0}.eco-orbit{animation:none}}
 
   /* ===== CLÍMAX DEL EMBUDO · Aparta tu lugar ===== */
   #asegurar{position:relative;overflow:hidden}
@@ -652,7 +668,7 @@
     </div>
 
     <div class="genflow">
-      <div class="gf reveal"><div class="gfn">1</div><h4>Doors abren</h4><p>Se anuncia la Generación. Entra quien aparta su silla, hasta llenar los 75.</p></div>
+      <div class="gf reveal"><div class="gfn">1</div><h4>Las puertas abren</h4><p>Se anuncia la Generación. Entra quien aparta su silla, hasta llenar los 75.</p></div>
       <div class="gf reveal"><div class="gfn">2</div><h4>Arrancan juntos</h4><p>Todos empiezan el mismo día. 6 semanas sincronizados, en vivo y a tu ritmo.</p></div>
       <div class="gf reveal"><div class="gfn">3</div><h4>Se gradúan</h4><p>Demo Day. Sales con tu hub, tu sistema y tu negocio potenciado con IA.</p></div>
       <div class="gf reveal"><div class="gfn">4</div><h4>Pasan a La Sala</h4><p>Perteneces para siempre al espacio de todos los graduados de cada Gen.</p></div>
@@ -762,31 +778,34 @@
 <section>
   <div class="wrap">
     <div class="sec-label reveal">Quiénes te enseñan</div>
-    <h2 class="reveal">No es un gurú anónimo. <em>Somos tres, y construimos en vivo contigo.</em></h2>
+    <h2 class="reveal founders-h2">No es un gurú anónimo.<em>Somos tres, y construimos en vivo contigo.</em></h2>
     <p class="sec-intro reveal">La Gen 01 la guiamos los tres socios de La Sala. Nada de teoría grabada y desaparecer. Estamos en los en vivos, resolviendo tu caso.</p>
     <div class="founders">
       <div class="founder reveal">
-        <div class="f-media">
-          <img class="ph" src="img/kevin.jpg" alt="Kevin, co-fundador de La Sala de IA" loading="lazy" style="object-position:52% 16%">
+        <a class="f-media" href="https://instagram.com/kecatire" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Kevin (@kecatire)">
+          <img class="ph" src="img/kevin.jpg" alt="Kevin, co-fundador de La Sala de IA" loading="lazy" style="object-position:50% 12%">
           <span class="f-tag">Co-fundador</span>
+          <span class="ig-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
           <div class="f-name"><h4>Kevin</h4><div class="role">Business strategist · sistemas de IA</div></div>
-        </div>
+        </a>
         <p>Business strategist y creador de contenido venezolano en Miami. Soy la mente detrás de cámara: construyo marcas y personajes de IA hiperrealistas y monto sistemas de producción de contenido que han hecho millones de views. Ayudo a negocios y creadores a usar la IA para crecer de verdad. Vivo obsesionado con encontrar el hack antes que nadie y convertir la IA en resultados que se ven.</p>
       </div>
       <div class="founder reveal">
-        <div class="f-media">
-          <img class="ph" src="img/manuel.jpg" alt="Manuel, co-fundador de La Sala de IA" loading="lazy" style="object-position:50% 22%">
+        <a class="f-media" href="https://instagram.com/manuhjimenez" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Manuel (@manuhjimenez)">
+          <img class="ph" src="img/manuel.jpg" alt="Manuel, co-fundador de La Sala de IA" loading="lazy" style="object-position:50% 18%">
           <span class="f-tag">Co-fundador</span>
+          <span class="ig-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
           <div class="f-name"><h4>Manuel</h4><div class="role">Estrategia creativa · producción</div></div>
-        </div>
+        </a>
         <p>Empresario, productor y estratega creativo puertorriqueño en Miami. Fundador de Doctor Media Creative Inc. (agencia de contenido, publicidad y generación de leads) y partner y Chief Creative Officer de Taily, marca de suplementos para perros con ventas anuales de siete cifras, donde lidera la estrategia creativa, el contenido y el posicionamiento.</p>
       </div>
       <div class="founder reveal">
-        <div class="f-media">
+        <a class="f-media" href="https://instagram.com/elsadelpino_" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Elsa (@elsadelpino_)">
           <img class="ph" src="img/elsa.jpg" alt="Elsa, co-host en vivo de La Sala de IA" loading="lazy" style="object-position:50% 20%">
           <span class="f-tag">Co-host en vivo</span>
+          <span class="ig-badge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5.5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></span>
           <div class="f-name"><h4>Elsa</h4><div class="role">Estratega de IA · neuromarketing</div></div>
-        </div>
+        </a>
         <p>Estratega de IA y neuromarketing, con maestría en Neuromarketing (Valencia) y más de 5 años en marketing digital, chatbots con IA y automatización. Lideró el chatbot de IA de la Comisión Estatal de Elecciones de Puerto Rico: más de 520,000 consultas y unas 27,000 horas ahorradas al sector público. Ha capacitado a más de 2,500 profesionales en IA generativa y hoy es Directora de Innovación y Desarrollo IA.</p>
       </div>
     </div>
@@ -988,27 +1007,91 @@
     <h2 class="reveal">Todo el ecosistema, conectado a un solo cerebro.</h2>
     <p class="sec-intro reveal">No aprendes herramientas sueltas: aprendes a orquestarlas desde tu hub de Claude.</p>
     <div class="eco reveal">
-      <svg viewBox="0 0 600 400" role="img" aria-label="Claude como hub central conectado a Higgsfield, HeyGen, ElevenLabs, Cowork y Projects">
-        <!-- líneas -->
-        <line class="eco-line" x1="300" y1="200" x2="300" y2="52"/>
-        <line class="eco-line" x1="300" y1="200" x2="505" y2="128"/>
-        <line class="eco-line" x1="300" y1="200" x2="470" y2="330"/>
-        <line class="eco-line" x1="300" y1="200" x2="130" y2="330"/>
-        <line class="eco-line" x1="300" y1="200" x2="95" y2="128"/>
+      <svg viewBox="0 0 600 430" role="img" aria-label="Claude como hub central conectado a Projects, Higgsfield, HeyGen, ElevenLabs y Cowork">
+        <defs>
+          <radialGradient id="hubFill" cx="50%" cy="36%" r="72%">
+            <stop offset="0%" stop-color="rgba(52,211,153,.34)"/>
+            <stop offset="100%" stop-color="rgba(9,30,21,.96)"/>
+          </radialGradient>
+          <radialGradient id="hubGlow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stop-color="rgba(52,211,153,.30)"/>
+            <stop offset="65%" stop-color="rgba(52,211,153,.05)"/>
+            <stop offset="100%" stop-color="rgba(52,211,153,0)"/>
+          </radialGradient>
+          <radialGradient id="nodeFill" cx="50%" cy="34%" r="78%">
+            <stop offset="0%" stop-color="rgba(19,44,31,.98)"/>
+            <stop offset="100%" stop-color="rgba(8,20,14,.98)"/>
+          </radialGradient>
+          <linearGradient id="L1" gradientUnits="userSpaceOnUse" x1="300" y1="220" x2="300" y2="62"><stop offset="0" stop-color="rgba(52,211,153,.5)"/><stop offset="1" stop-color="rgba(52,211,153,.08)"/></linearGradient>
+          <linearGradient id="L2" gradientUnits="userSpaceOnUse" x1="300" y1="220" x2="450" y2="171"><stop offset="0" stop-color="rgba(52,211,153,.5)"/><stop offset="1" stop-color="rgba(52,211,153,.08)"/></linearGradient>
+          <linearGradient id="L3" gradientUnits="userSpaceOnUse" x1="300" y1="220" x2="393" y2="348"><stop offset="0" stop-color="rgba(52,211,153,.5)"/><stop offset="1" stop-color="rgba(52,211,153,.08)"/></linearGradient>
+          <linearGradient id="L4" gradientUnits="userSpaceOnUse" x1="300" y1="220" x2="207" y2="348"><stop offset="0" stop-color="rgba(52,211,153,.5)"/><stop offset="1" stop-color="rgba(52,211,153,.08)"/></linearGradient>
+          <linearGradient id="L5" gradientUnits="userSpaceOnUse" x1="300" y1="220" x2="150" y2="171"><stop offset="0" stop-color="rgba(52,211,153,.5)"/><stop offset="1" stop-color="rgba(52,211,153,.08)"/></linearGradient>
+        </defs>
+        <!-- líneas radiales -->
+        <line class="eco-line" x1="300" y1="220" x2="300" y2="62" stroke="url(#L1)"/>
+        <line class="eco-line" x1="300" y1="220" x2="450" y2="171" stroke="url(#L2)"/>
+        <line class="eco-line" x1="300" y1="220" x2="393" y2="348" stroke="url(#L3)"/>
+        <line class="eco-line" x1="300" y1="220" x2="207" y2="348" stroke="url(#L4)"/>
+        <line class="eco-line" x1="300" y1="220" x2="150" y2="171" stroke="url(#L5)"/>
         <!-- pulsos (bombeo desde Claude) -->
-        <circle class="eco-pulse" r="4"><animateMotion dur="1.8s" repeatCount="indefinite" begin="0s" path="M300,200L300,52"/></circle>
-        <circle class="eco-pulse" r="4"><animateMotion dur="1.8s" repeatCount="indefinite" begin="0.36s" path="M300,200L505,128"/></circle>
-        <circle class="eco-pulse" r="4"><animateMotion dur="1.8s" repeatCount="indefinite" begin="0.72s" path="M300,200L470,330"/></circle>
-        <circle class="eco-pulse" r="4"><animateMotion dur="1.8s" repeatCount="indefinite" begin="1.08s" path="M300,200L130,330"/></circle>
-        <circle class="eco-pulse" r="4"><animateMotion dur="1.8s" repeatCount="indefinite" begin="1.44s" path="M300,200L95,128"/></circle>
+        <circle class="eco-pulse" r="3.4"><animateMotion dur="2s" repeatCount="indefinite" begin="0s"    path="M300,220L300,62"/></circle>
+        <circle class="eco-pulse" r="3.4"><animateMotion dur="2s" repeatCount="indefinite" begin="0.4s"  path="M300,220L450,171"/></circle>
+        <circle class="eco-pulse" r="3.4"><animateMotion dur="2s" repeatCount="indefinite" begin="0.8s"  path="M300,220L393,348"/></circle>
+        <circle class="eco-pulse" r="3.4"><animateMotion dur="2s" repeatCount="indefinite" begin="1.2s"  path="M300,220L207,348"/></circle>
+        <circle class="eco-pulse" r="3.4"><animateMotion dur="2s" repeatCount="indefinite" begin="1.6s"  path="M300,220L150,171"/></circle>
         <!-- satélites -->
-        <g class="eco-node"><circle cx="300" cy="52" r="38"/><text x="300" y="50">Projects</text><text class="sub" x="300" y="65">tu espacio</text></g>
-        <g class="eco-node"><circle cx="505" cy="128" r="38"/><text x="505" y="126">Higgsfield</text><text class="sub" x="505" y="141">imagen · video</text></g>
-        <g class="eco-node"><circle cx="470" cy="330" r="38"/><text x="470" y="328">HeyGen</text><text class="sub" x="470" y="343">avatares</text></g>
-        <g class="eco-node"><circle cx="130" cy="330" r="38"/><text x="130" y="328">ElevenLabs</text><text class="sub" x="130" y="343">voz IA</text></g>
-        <g class="eco-node"><circle cx="95" cy="128" r="38"/><text x="95" y="126">Cowork</text><text class="sub" x="95" y="141">automatiza</text></g>
+        <g class="eco-node">
+          <circle class="nring" cx="300" cy="62" r="34"/>
+          <path class="glyph" d="M288,56 h6.5 l2.2,3 h11.3 a1.6,1.6 0 0 1 1.6,1.6 v7.8 a1.6,1.6 0 0 1 -1.6,1.6 h-19.6 a1.6,1.6 0 0 1 -1.6,-1.6 v-11.4 a1.6,1.6 0 0 1 1.6,-1.6 z"/>
+          <text class="lbl" x="300" y="115">Projects</text><text class="sub" x="300" y="127">tu espacio</text>
+        </g>
+        <g class="eco-node">
+          <circle class="nring" cx="450" cy="171" r="34"/>
+          <g class="glyph" transform="translate(450,171)">
+            <rect x="-12" y="-9" width="24" height="18" rx="2.6"/>
+            <circle class="fill" cx="-5" cy="-3" r="2.3"/>
+            <path d="M-11,8 L-3,0 L2,4.5 L6,0.5 L11,5.5"/>
+          </g>
+          <text class="lbl" x="450" y="224">Higgsfield</text><text class="sub" x="450" y="236">imagen · video</text>
+        </g>
+        <g class="eco-node">
+          <circle class="nring" cx="393" cy="348" r="34"/>
+          <g class="glyph" transform="translate(393,348)">
+            <circle cx="0" cy="-5.5" r="5.5"/>
+            <path d="M-10,11 a10,9.5 0 0 1 20,0"/>
+          </g>
+          <text class="lbl" x="393" y="401">HeyGen</text><text class="sub" x="393" y="413">avatares</text>
+        </g>
+        <g class="eco-node">
+          <circle class="nring" cx="207" cy="348" r="34"/>
+          <g class="glyph fill" transform="translate(207,348)">
+            <rect x="-12" y="-4" width="3" height="8" rx="1.5"/>
+            <rect x="-6.5" y="-9.5" width="3" height="19" rx="1.5"/>
+            <rect x="-1" y="-6.5" width="3" height="13" rx="1.5"/>
+            <rect x="4.5" y="-11.5" width="3" height="23" rx="1.5"/>
+            <rect x="10" y="-5" width="3" height="10" rx="1.5"/>
+          </g>
+          <text class="lbl" x="207" y="401">ElevenLabs</text><text class="sub" x="207" y="413">voz IA</text>
+        </g>
+        <g class="eco-node">
+          <circle class="nring" cx="150" cy="171" r="34"/>
+          <g class="glyph" transform="translate(150,171)">
+            <rect x="-13" y="-10" width="26" height="20" rx="3.2"/>
+            <polyline points="-7,-3 -3,1 -7,5"/>
+            <line x1="0" y1="6" x2="7" y2="6"/>
+          </g>
+          <text class="lbl" x="150" y="224">Cowork</text><text class="sub" x="150" y="236">automatiza</text>
+        </g>
         <!-- hub Claude -->
-        <g class="eco-hub"><circle class="eco-ring" cx="300" cy="200" r="50"/><circle cx="300" cy="200" r="50"/><text x="300" y="197">Claude</text><text class="sub" x="300" y="214">tu hub central</text></g>
+        <g class="eco-hub">
+          <circle class="hub-glow" cx="300" cy="220" r="68"/>
+          <circle class="eco-ring" cx="300" cy="220" r="52"/>
+          <circle class="eco-orbit" cx="300" cy="220" r="62"/>
+          <circle class="hub-core" cx="300" cy="220" r="52"/>
+          <text class="hub-lbl" x="300" y="216">Claude</text>
+          <text class="hub-sub" x="300" y="234">tu hub central</text>
+        </g>
       </svg>
     </div>
   </div>
@@ -1026,7 +1109,7 @@
       </div>
       <div class="get reveal">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M23 7l-7 5 7 5V7z"/><rect x="1" y="5" width="15" height="14" rx="2"/></svg></div>
-        <div><h4>6 en vivos semanales</h4><p>Construimos marcas reales frente a tus ojos. Q&A y hot seats. Todo grabado.</p></div>
+        <div><h4>6 sesiones en vivo</h4><p>Una cada semana. Construimos marcas reales frente a tus ojos. Q&A y hot seats. Todo grabado.</p></div>
       </div>
       <div class="get reveal">
         <div class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15 15 0 010 20 15 15 0 010-20"/></svg></div>
@@ -1068,11 +1151,13 @@
         <div class="tag">Más elegido</div>
         <div class="pk">Pago único</div>
         <div class="pprice">$375</div>
+        <div class="pweek">≈ <b>$62.50</b> por semana · 6 semanas</div>
         <div class="pdesc">Todo el cohort + La Sala de por vida. Pagas una vez y listo.</div>
       </div>
       <div class="pcard fin reveal">
         <div class="pk">Financiado</div>
         <div class="pprice">$400</div>
+        <div class="pweek">≈ <b>$66.67</b> por semana · 6 semanas</div>
         <div class="pdesc">2 pagos de $200. La segunda cuota se cobra automática ~30 días después.</div>
       </div>
     </div>
