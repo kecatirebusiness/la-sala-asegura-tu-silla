@@ -35,13 +35,14 @@
   .hl{color:var(--green);font-weight:700}
 
   /* NAV */
-  .nav{position:sticky;top:0;z-index:60;background:rgba(7,17,9,.6);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
+  .topbar{position:sticky;top:0;z-index:60}
+  .nav{position:relative;background:rgba(7,17,9,.72);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px)}
   .nav-inner{max-width:940px;margin:0 auto;padding:10px 22px;display:flex;align-items:center;gap:14px}
   .brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px}
   .lsi-logo{width:30px;height:30px;flex-shrink:0}
   .nav-cta{margin-left:auto;background:var(--green);color:#04240f;font-weight:800;font-size:13px;padding:9px 16px;border-radius:999px;text-decoration:none;white-space:nowrap;transition:transform .12s}
   /* LAUNCH BANNER */
-  .launch-bar{position:relative;z-index:59;background:linear-gradient(90deg,rgba(34,197,94,.14),rgba(52,211,153,.06) 60%,rgba(34,197,94,.14));border-bottom:1px solid rgba(52,211,153,.22)}
+  .launch-bar{position:relative;z-index:59;background:linear-gradient(90deg,rgba(34,197,94,.16),rgba(52,211,153,.08) 60%,rgba(34,197,94,.16)),rgba(6,15,10,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid rgba(52,211,153,.24)}
   .launch-inner{max-width:940px;margin:0 auto;padding:9px 22px;display:flex;align-items:center;justify-content:center;gap:11px;flex-wrap:wrap;font-size:13px;color:var(--text);text-align:center;line-height:1.4}
   .launch-inner b{color:var(--green);font-weight:800}
   .lb-icon{display:inline-flex}.lb-icon svg{width:15px;height:15px;color:var(--green)}
@@ -80,6 +81,14 @@
   .dep-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
   .dep-tag{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);background:var(--green-soft);padding:6px 12px;border-radius:999px}
   .dep-live{font-size:12px;color:var(--muted)} .dep-live b{color:var(--text);font-weight:700}
+  /* countdown en la tarjeta de depósito */
+  .dep-cd{margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--border)}
+  .dep-cd-lbl{display:flex;align-items:center;justify-content:center;gap:7px;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+  .dep-cd-lbl b{color:var(--green);font-weight:800}
+  .dep-cd-row{display:flex;justify-content:center;gap:7px}
+  .cd-unit{display:flex;flex-direction:column;align-items:center;gap:3px;background:#0d0d0d;border:1px solid rgba(52,211,153,.28);border-radius:10px;padding:8px 0 6px;flex:1;max-width:62px}
+  .cd-n{font-family:ui-monospace,'SF Mono',Menlo,Consolas,monospace;font-size:23px;font-weight:800;color:var(--core);line-height:1;letter-spacing:-.02em}
+  .cd-l{font-size:8.5px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 
   .dep-price{text-align:center;padding:2px 0 0}
   .dep-amount{display:inline-flex;align-items:flex-start;font-size:72px;font-weight:800;letter-spacing:-.045em;line-height:.9;background:linear-gradient(180deg,#eafff1,#9fe9c0);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
@@ -105,8 +114,7 @@
   .seats-meta b{color:var(--text);font-weight:700}
   .seats-left{color:var(--green);font-weight:700}
   .seats-bar{height:7px;border-radius:999px;background:rgba(255,255,255,.08);overflow:hidden;position:relative}
-  .seats-fill{position:absolute;inset:0;width:0;border-radius:999px;background:linear-gradient(90deg,var(--green),var(--core));box-shadow:0 0 12px rgba(34,197,94,.6);animation:fill 1.6s cubic-bezier(.22,1,.36,1) .3s forwards}
-  @keyframes fill{to{width:54.6%}}
+  .seats-fill{position:absolute;inset:0;width:20%;border-radius:999px;background:linear-gradient(90deg,var(--green),var(--core));box-shadow:0 0 12px rgba(34,197,94,.6);transition:width .9s cubic-bezier(.22,1,.36,1)}
 
   /* CTA BUTTON */
   .seat-btn{position:relative;overflow:hidden;display:inline-flex;align-items:center;justify-content:center;gap:11px;width:100%;max-width:420px;margin:22px auto 0;background:linear-gradient(135deg,var(--green),var(--core));color:#04240f;font-weight:800;font-size:18px;letter-spacing:-.01em;padding:18px 26px;border:none;border-radius:14px;cursor:pointer;text-decoration:none;box-shadow:0 10px 30px -10px rgba(34,197,94,.55);transition:transform .14s,box-shadow .25s;animation:glowpulse 2.8s ease-in-out infinite}
@@ -235,6 +243,9 @@
   .logo-marquee:hover .logo-track{animation-play-state:paused}
   .logo-track img{height:32px;width:auto;margin-right:66px;flex-shrink:0;opacity:.7;filter:grayscale(.2);transition:opacity .25s ease,filter .25s ease;-webkit-user-drag:none;user-select:none;pointer-events:none}
   @keyframes logoscroll{from{transform:translate3d(0,0,0)}to{transform:translate3d(-50%,0,0)}}
+  /* visibilidad responsive del marquee */
+  .only-mobile{display:none}
+  .only-desktop{display:block}
 
   /* VALUE STACK */
   .vstack{max-width:580px;margin:0 auto}
@@ -528,7 +539,7 @@
     .gen-mega .num{animation:none}
     .intro-done .gen-mega,.intro-done .gen-eyebrow{animation:none}
     #scrollbar{transition:none}
-    .seats-fill{animation:none;width:54.6%}
+    .seats-fill{transition:none}
   }
 
   /* ===== HERO headline v2 ===== */
@@ -590,12 +601,12 @@
   .eco2-cap{text-align:center;font-size:13px;color:var(--muted);margin-top:6px;line-height:1.5;max-width:440px;margin-left:auto;margin-right:auto}
 
   @media(max-width:760px){
+    .only-mobile{display:block}
+    .only-desktop{display:none}
     .hero-h1{gap:3px}
     .h1-top{font-size:18px}
     .h1-hero{font-size:35px;line-height:1.04}
     .hero-lead{font-size:15px;margin-top:16px;max-width:340px}
-    .hero-chips{gap:7px;margin-top:18px}
-    .hero-chips span{font-size:11.5px;padding:7px 12px}
     .term-win{border-radius:11px}
     .tw-body{font-size:12px;padding:14px 15px 16px;line-height:1.7}
     .eco{margin-top:2px}
@@ -669,6 +680,7 @@
 
 <div id="scrollbar" aria-hidden="true"></div>
 
+<div class="topbar">
 <!-- NAV -->
 <div class="nav">
   <div class="nav-inner">
@@ -688,6 +700,7 @@
     <span class="lb-count" id="lbCount">Faltan…</span>
   </div>
 </div>
+</div>
 
 <!-- ===== HERO · GEN-01 IDENTITY ===== -->
 <div class="hero">
@@ -699,11 +712,6 @@
       <span class="h1-hero">Te va a <em>multiplicar</em>.</span>
     </h1>
     <p class="hero-lead">Domina Claude y la IA aplicada a tu negocio en 6 semanas, con acompañamiento en vivo.</p>
-    <div class="hero-chips">
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg> En vivo, en grupo</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg> Empiezas desde cero</span>
-      <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg> Sin salir en cámara</span>
-    </div>
 
     <div class="gen-id">
       <div class="gen-eyebrow">Tu cohort se llama</div>
@@ -712,7 +720,7 @@
       <p class="gen-sub reveal">No entras a un curso: entras a una <b>Generación</b>. Arrancan el mismo día, avanzan juntos las 6 semanas y se gradúan juntos. Tú serías de la <b>primera.</b></p>
     </div>
 
-    <div class="logo-strip reveal">
+    <div class="logo-strip reveal only-mobile">
       <div class="logo-strip-cap">El stack que vas a dominar — y sigue creciendo</div>
       <div class="logo-marquee">
         <div class="logo-track">
@@ -781,6 +789,33 @@
 
 <!-- ===== FOUNDERS / QUIÉNES TE ENSEÑAN ===== -->
 <section>
+  <div class="logo-strip reveal only-desktop" style="margin-top:0;margin-bottom:52px">
+    <div class="logo-strip-cap">El stack que vas a dominar — y sigue creciendo</div>
+    <div class="logo-marquee">
+      <div class="logo-track">
+        <img src="img/logos/claude.png" alt="Claude" width="154" height="32" decoding="async">
+        <img src="img/logos/chatgpt.png" alt="ChatGPT" width="112" height="32" decoding="async">
+        <img src="img/logos/gemini.png" alt="Gemini" width="87" height="32" decoding="async">
+        <img src="img/logos/higgsfield.png" alt="Higgsfield" width="163" height="32" decoding="async">
+        <img src="img/logos/heygen.png" alt="HeyGen" width="142" height="32" decoding="async">
+        <img src="img/logos/elevenlabs.png" alt="ElevenLabs" width="64" height="32" decoding="async">
+        <img src="img/logos/cowork.png" alt="Claude Cowork" width="79" height="32" decoding="async">
+        <img src="img/logos/claude-code.png" alt="Claude Code" width="59" height="32" decoding="async">
+        <img src="img/logos/lovable.png" alt="Lovable" width="186" height="32" decoding="async">
+        <img src="img/logos/manychat.png" alt="Manychat" width="180" height="32" decoding="async">
+        <img src="img/logos/claude.png" alt="" aria-hidden="true" width="154" height="32" decoding="async">
+        <img src="img/logos/chatgpt.png" alt="" aria-hidden="true" width="112" height="32" decoding="async">
+        <img src="img/logos/gemini.png" alt="" aria-hidden="true" width="87" height="32" decoding="async">
+        <img src="img/logos/higgsfield.png" alt="" aria-hidden="true" width="163" height="32" decoding="async">
+        <img src="img/logos/heygen.png" alt="" aria-hidden="true" width="142" height="32" decoding="async">
+        <img src="img/logos/elevenlabs.png" alt="" aria-hidden="true" width="64" height="32" decoding="async">
+        <img src="img/logos/cowork.png" alt="" aria-hidden="true" width="79" height="32" decoding="async">
+        <img src="img/logos/claude-code.png" alt="" aria-hidden="true" width="59" height="32" decoding="async">
+        <img src="img/logos/lovable.png" alt="" aria-hidden="true" width="186" height="32" decoding="async">
+        <img src="img/logos/manychat.png" alt="" aria-hidden="true" width="180" height="32" decoding="async">
+      </div>
+    </div>
+  </div>
   <div class="wrap">
     <div class="sec-label reveal">Quiénes te enseñan</div>
     <h2 class="reveal founders-h2">No es un gurú anónimo.<em>Somos tres, y construimos en vivo contigo.</em></h2>
@@ -910,9 +945,18 @@
     <!-- DEPOSIT CARD -->
     <div class="deposit-frame reveal">
       <div class="deposit">
+      <div class="dep-cd">
+        <div class="dep-cd-lbl">El acceso general abre en</div>
+        <div class="dep-cd-row">
+          <div class="cd-unit"><span class="cd-n" data-cd="d">00</span><span class="cd-l">días</span></div>
+          <div class="cd-unit"><span class="cd-n" data-cd="h">00</span><span class="cd-l">hrs</span></div>
+          <div class="cd-unit"><span class="cd-n" data-cd="m">00</span><span class="cd-l">min</span></div>
+          <div class="cd-unit"><span class="cd-n" data-cd="s">00</span><span class="cd-l">seg</span></div>
+        </div>
+      </div>
       <div class="dep-top">
         <span class="dep-tag"><span class="dot-pulse"></span> Acceso anticipado</span>
-        <span class="dep-live"><span class="lv-dot"></span><b>17</b> reservando ahora</span>
+        <span class="dep-live"><span class="lv-dot"></span><b class="js-reserving">17</b> reservando ahora</span>
       </div>
 
       <div class="dep-price">
@@ -933,8 +977,8 @@
       </div>
 
       <div class="seats">
-        <div class="seats-meta"><span><b>41</b> de 75 sillas ocupadas</span><span class="seats-left">quedan 34</span></div>
-        <div class="seats-bar"><div class="seats-fill"></div></div>
+        <div class="seats-meta"><span><b class="js-occ">15</b> de 75 sillas ocupadas</span><span class="seats-left">quedan <span class="js-left">60</span></span></div>
+        <div class="seats-bar"><div class="seats-fill" style="width:20%"></div></div>
       </div>
 
       <a href="https://buy.stripe.com/6oU8wOcM220A42Hb62djO02" class="seat-btn js-reserve">
@@ -1252,9 +1296,18 @@
     <p class="sec-intro reveal">Mientras tú lo piensas, otros ya están reservando. Los $50 se descuentan de tu inscripción. La silla, una vez llena, no vuelve hasta la Gen 02.</p>
 
     <div class="deposit reveal" style="margin-top:8px">
+      <div class="dep-cd">
+        <div class="dep-cd-lbl">El acceso general abre en</div>
+        <div class="dep-cd-row">
+          <div class="cd-unit"><span class="cd-n" data-cd="d">00</span><span class="cd-l">días</span></div>
+          <div class="cd-unit"><span class="cd-n" data-cd="h">00</span><span class="cd-l">hrs</span></div>
+          <div class="cd-unit"><span class="cd-n" data-cd="m">00</span><span class="cd-l">min</span></div>
+          <div class="cd-unit"><span class="cd-n" data-cd="s">00</span><span class="cd-l">seg</span></div>
+        </div>
+      </div>
       <div class="dep-top">
         <span class="dep-tag"><span class="dot-pulse"></span> Acceso anticipado</span>
-        <span class="dep-live"><b>17</b> reservando ahora</span>
+        <span class="dep-live"><b class="js-reserving">17</b> reservando ahora</span>
       </div>
       <div class="dep-price">
         <div class="dep-amount"><sup>$</sup>50<span>hoy</span></div>
@@ -1267,8 +1320,8 @@
       </div>
       <div class="dep-finance">o financiado en 2 pagos de $200</div>
       <div class="seats">
-        <div class="seats-meta"><span><b>41</b> de 75 sillas ocupadas</span><span class="seats-left">quedan 34</span></div>
-        <div class="seats-bar"><div class="seats-fill"></div></div>
+        <div class="seats-meta"><span><b class="js-occ">15</b> de 75 sillas ocupadas</span><span class="seats-left">quedan <span class="js-left">60</span></span></div>
+        <div class="seats-bar"><div class="seats-fill" style="width:20%"></div></div>
       </div>
       <a href="https://buy.stripe.com/6oU8wOcM220A42Hb62djO02" class="seat-btn js-reserve">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
@@ -1453,23 +1506,65 @@
     }
   })();
 </script>
-<!-- Countdown al acceso general -->
+<!-- Countdown + prueba social en vivo -->
 <script>
 (function(){
-  var el=document.getElementById('lbCount');
-  if(!el) return;
   var target=new Date(2026,6,22,0,0,0).getTime(); // 22 julio 2026, hora local del visitante
   function pad(n){return (n<10?'0':'')+n;}
+
+  // ---- Countdown (banner + tarjetas de depósito) ----
+  var lb=document.getElementById('lbCount');
+  var cdD=document.querySelectorAll('.cd-n[data-cd="d"]'),
+      cdH=document.querySelectorAll('.cd-n[data-cd="h"]'),
+      cdM=document.querySelectorAll('.cd-n[data-cd="m"]'),
+      cdS=document.querySelectorAll('.cd-n[data-cd="s"]');
+  function setAll(list,v){ for(var i=0;i<list.length;i++) list[i].textContent=v; }
   function tick(){
     var d=target-Date.now();
-    if(d<=0){ el.textContent='¡Ya está abierto!'; return; }
+    if(d<=0){
+      if(lb) lb.textContent='¡Ya está abierto!';
+      setAll(cdD,'00');setAll(cdH,'00');setAll(cdM,'00');setAll(cdS,'00');
+      return;
+    }
     var days=Math.floor(d/86400000),
         hrs=Math.floor(d%86400000/3600000),
         mins=Math.floor(d%3600000/60000),
         secs=Math.floor(d%60000/1000);
-    el.textContent='Faltan '+days+'d '+pad(hrs)+'h '+pad(mins)+'m '+pad(secs)+'s';
+    if(lb) lb.textContent='Faltan '+days+'d '+pad(hrs)+'h '+pad(mins)+'m '+pad(secs)+'s';
+    setAll(cdD,pad(days));setAll(cdH,pad(hrs));setAll(cdM,pad(mins));setAll(cdS,pad(secs));
   }
   tick(); setInterval(tick,1000);
+
+  // ---- "reservando ahora": 17 -> 50, +1 cada ~10s ----
+  var resEls=document.querySelectorAll('.js-reserving');
+  var res=17;
+  function bumpRes(){
+    if(res>=50) return;
+    res+=1;
+    for(var i=0;i<resEls.length;i++) resEls[i].textContent=res;
+    if(res<50) setTimeout(bumpRes, 9000+Math.random()*3000);
+  }
+  if(resEls.length) setTimeout(bumpRes, 9000+Math.random()*3000);
+
+  // ---- sillas ocupadas: 15 -> 65, sube cada ~5s ----
+  var occEls=document.querySelectorAll('.js-occ'),
+      leftEls=document.querySelectorAll('.js-left'),
+      fillEls=document.querySelectorAll('.seats-fill');
+  var occ=15, CAP=65, TOTAL=75;
+  function render(){
+    for(var i=0;i<occEls.length;i++) occEls[i].textContent=occ;
+    for(var j=0;j<leftEls.length;j++) leftEls[j].textContent=(TOTAL-occ);
+    var w=(occ/TOTAL*100).toFixed(1)+'%';
+    for(var k=0;k<fillEls.length;k++) fillEls[k].style.width=w;
+  }
+  function bumpSeats(){
+    if(occ>=CAP) return;
+    occ=Math.min(CAP, occ + (Math.random()<0.25?2:1));
+    render();
+    if(occ<CAP) setTimeout(bumpSeats, 4500+Math.random()*1500);
+  }
+  render();
+  if(occEls.length) setTimeout(bumpSeats, 4500+Math.random()*1500);
 })();
 </script>
 </body>
