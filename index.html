@@ -976,12 +976,8 @@
         <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M5 13l4 4L19 7"/></svg> Es tu primer abono</span>
       </div>
 
-      <div class="seats">
-        <div class="seats-meta"><span><b class="js-occ">15</b> de 75 sillas ocupadas</span><span class="seats-left">quedan <span class="js-left">60</span></span></div>
-        <div class="seats-bar"><div class="seats-fill" style="width:20%"></div></div>
-      </div>
 
-      <a href="https://buy.stripe.com/6oU8wOcM220A42Hb62djO02" class="seat-btn js-reserve">
+      <a href="https://la-sala-de-ia-3829bf.circle.so/checkout/save-your-seat" class="seat-btn js-reserve">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
         Asegura tu silla · $50
       </a>
@@ -1319,11 +1315,7 @@
         <div class="lg total"><span class="lg-k">Te queda al inscribirte</span><span class="lg-v">$325</span></div>
       </div>
       <div class="dep-finance">o financiado en 2 pagos de $200</div>
-      <div class="seats">
-        <div class="seats-meta"><span><b class="js-occ">15</b> de 75 sillas ocupadas</span><span class="seats-left">quedan <span class="js-left">60</span></span></div>
-        <div class="seats-bar"><div class="seats-fill" style="width:20%"></div></div>
-      </div>
-      <a href="https://buy.stripe.com/6oU8wOcM220A42Hb62djO02" class="seat-btn js-reserve">
+      <a href="https://la-sala-de-ia-3829bf.circle.so/checkout/save-your-seat" class="seat-btn js-reserve">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 13l4 4L19 7"/></svg>
         Asegura tu silla · $50
       </a>
@@ -1349,7 +1341,7 @@
 <!-- STICKY MOBILE BAR -->
 <div class="mbar">
   <div class="mp">$50 <span>guarda tu silla · primer abono</span></div>
-  <a href="https://buy.stripe.com/6oU8wOcM220A42Hb62djO02" class="js-reserve">Asegura tu silla</a>
+  <a href="https://la-sala-de-ia-3829bf.circle.so/checkout/save-your-seat" class="js-reserve">Asegura tu silla</a>
 </div>
 
 <!-- CHECKOUT EMBEBIDO (Stripe) -->
@@ -1461,7 +1453,7 @@
   });
 
   // ===== Checkout embebido (Vercel) con fallback al Payment Link =====
-  var PAYMENT_LINK = 'https://buy.stripe.com/6oU8wOcM220A42Hb62djO02';
+  var PAYMENT_LINK = 'https://la-sala-de-ia-3829bf.circle.so/checkout/save-your-seat';
   (function(){
     var overlay=document.getElementById('pay-overlay');
     var stripe=null, clientSecret=null, checkout=null, mounting=false;
@@ -1487,7 +1479,6 @@
     }
     document.querySelectorAll('.js-reserve').forEach(function(b){
       b.setAttribute('href',PAYMENT_LINK);
-      b.addEventListener('click',openPay);
     });
     if(overlay){
       overlay.addEventListener('click',function(e){ if(e.target===overlay) hideOverlay(); });
@@ -1535,36 +1526,16 @@
   }
   tick(); setInterval(tick,1000);
 
-  // ---- "reservando ahora": 17 -> 50, +1 cada ~10s ----
+  // ---- "reservando ahora": 17 -> 65, sube progresivamente cada ~5s ----
   var resEls=document.querySelectorAll('.js-reserving');
-  var res=17;
+  var res=17, CAP=65;
   function bumpRes(){
-    if(res>=50) return;
-    res+=1;
+    if(res>=CAP) return;
+    res=Math.min(CAP, res + (Math.random()<0.25?2:1));
     for(var i=0;i<resEls.length;i++) resEls[i].textContent=res;
-    if(res<50) setTimeout(bumpRes, 9000+Math.random()*3000);
+    if(res<CAP) setTimeout(bumpRes, 4500+Math.random()*1500);
   }
-  if(resEls.length) setTimeout(bumpRes, 9000+Math.random()*3000);
-
-  // ---- sillas ocupadas: 15 -> 65, sube cada ~5s ----
-  var occEls=document.querySelectorAll('.js-occ'),
-      leftEls=document.querySelectorAll('.js-left'),
-      fillEls=document.querySelectorAll('.seats-fill');
-  var occ=15, CAP=65, TOTAL=75;
-  function render(){
-    for(var i=0;i<occEls.length;i++) occEls[i].textContent=occ;
-    for(var j=0;j<leftEls.length;j++) leftEls[j].textContent=(TOTAL-occ);
-    var w=(occ/TOTAL*100).toFixed(1)+'%';
-    for(var k=0;k<fillEls.length;k++) fillEls[k].style.width=w;
-  }
-  function bumpSeats(){
-    if(occ>=CAP) return;
-    occ=Math.min(CAP, occ + (Math.random()<0.25?2:1));
-    render();
-    if(occ<CAP) setTimeout(bumpSeats, 4500+Math.random()*1500);
-  }
-  render();
-  if(occEls.length) setTimeout(bumpSeats, 4500+Math.random()*1500);
+  if(resEls.length) setTimeout(bumpRes, 4500+Math.random()*1500);
 })();
 </script>
 </body>
