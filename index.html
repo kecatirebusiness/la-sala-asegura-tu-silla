@@ -6,6 +6,9 @@
 <title>Asegura tu silla · La Sala de IA · Generación 01</title>
 <meta name="description" content="6 semanas para dominar Claude y el ecosistema de IA aplicado a tu negocio. Sin salir en cámara. Aparta tu silla en la Generación 01 con $50 que se descuentan de tu inscripción.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'%3E%3Ccircle cx='20' cy='20' r='18' fill='%2300D26A'/%3E%3Ccircle cx='15.4' cy='17' r='1.9' fill='%23000'/%3E%3Ccircle cx='24.6' cy='17' r='1.9' fill='%23000'/%3E%3Cline x1='16.4' y1='23.4' x2='23.6' y2='23.4' stroke='%23000' stroke-width='2.1' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg:#071109; --panel:rgba(255,255,255,0.028); --panel-2:rgba(255,255,255,0.05);
@@ -64,6 +67,14 @@
   /* barra de progreso de scroll */
   #scrollbar{position:fixed;top:0;left:0;height:3px;width:0;z-index:80;background:linear-gradient(90deg,var(--green),var(--core));box-shadow:0 0 10px rgba(34,197,94,.55);border-radius:0 3px 3px 0;transition:width .08s linear}
   .eyebrow{display:inline-flex;align-items:center;gap:8px;font-size:12px;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--green);margin-bottom:20px;background:var(--green-soft);border:1px solid rgba(34,197,94,.25);padding:7px 15px;border-radius:999px}
+  /* logo oficial (lockup) */
+  .brand-lockup{display:flex;flex-direction:column;align-items:center;gap:9px;margin-bottom:22px}
+  .bl-mark{display:inline-flex;align-items:center;gap:11px}
+  .bl-face{width:33px;height:33px;flex-shrink:0}
+  .bl-word{font-family:'Instrument Serif',Georgia,'Times New Roman',serif;font-size:33px;line-height:1;white-space:nowrap}
+  .bl-word .bl-la{color:#F8FBF9;font-weight:400}
+  .bl-word .bl-ia{color:var(--green);font-style:italic;font-weight:400}
+  .bl-tag{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--green)}
   .dot-pulse{width:7px;height:7px;border-radius:50%;background:currentColor;display:inline-block;box-shadow:0 0 0 0 rgba(34,197,94,.6);animation:pulse 1.8s infinite}
   @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(34,197,94,.6)}70%{box-shadow:0 0 0 8px rgba(34,197,94,0)}100%{box-shadow:0 0 0 0 rgba(34,197,94,0)}}
   .hero h1{font-size:54px;font-weight:700;letter-spacing:-.03em;line-height:1.03;max-width:800px;margin:0 auto}
@@ -81,6 +92,17 @@
   .dep-top{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
   .dep-tag{display:inline-flex;align-items:center;gap:7px;font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--green);background:var(--green-soft);padding:6px 12px;border-radius:999px}
   .dep-live{font-size:12px;color:var(--muted)} .dep-live b{color:var(--text);font-weight:700}
+  /* contador de escasez (FOMO) */
+  .scarcity{display:flex;align-items:center;gap:12px;margin-bottom:18px;padding:12px 15px;border-radius:12px;background:linear-gradient(90deg,rgba(242,193,78,.13),rgba(242,193,78,.04));border:1px solid rgba(242,193,78,.32)}
+  .sc-dot{width:9px;height:9px;border-radius:50%;background:var(--warn);flex-shrink:0;box-shadow:0 0 0 0 rgba(242,193,78,.6);animation:scpulse 1.8s ease-out infinite}
+  @keyframes scpulse{0%{box-shadow:0 0 0 0 rgba(242,193,78,.55)}100%{box-shadow:0 0 0 13px rgba(242,193,78,0)}}
+  .sc-body{text-align:left;line-height:1.28;min-width:0}
+  .sc-main{font-size:15px;font-weight:800;color:#F6D98A;letter-spacing:-.01em}
+  .sc-main b{font-size:20px;color:var(--warn);font-weight:800}
+  .sc-sub{font-size:11.5px;color:var(--muted);margin-top:2px}
+  .scarcity.sold-out{background:rgba(255,255,255,.04);border-color:var(--border)} .scarcity.sold-out .sc-main{color:var(--muted)} .scarcity.sold-out .sc-main b{color:var(--danger)} .scarcity.sold-out .sc-dot{background:var(--danger);animation:none}
+  .seat-btn.is-closed{filter:grayscale(1);opacity:.5;pointer-events:none;animation:none}
+  @media(prefers-reduced-motion:reduce){.sc-dot{animation:none}}
   /* countdown en la tarjeta de depósito */
   .dep-cd{margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--border)}
   .dep-cd-lbl{display:flex;align-items:center;justify-content:center;gap:7px;font-size:10.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
@@ -706,7 +728,13 @@
 <div class="hero">
   <div class="hero-fx" aria-hidden="true"><span></span><span></span><span></span></div>
   <div class="wrap genwrap">
-    <div class="eyebrow"><span class="dot-pulse"></span> La Sala de IA · primera Generación</div>
+    <div class="brand-lockup reveal">
+      <div class="bl-mark">
+        <svg class="bl-face" viewBox="0 0 40 40"><circle cx="20" cy="20" r="18" fill="#00D26A"/><circle cx="15.4" cy="17" r="1.9" fill="#04240f"/><circle cx="24.6" cy="17" r="1.9" fill="#04240f"/><line x1="16.4" y1="23.4" x2="23.6" y2="23.4" stroke="#04240f" stroke-width="2.1" stroke-linecap="round"/></svg>
+        <span class="bl-word"><span class="bl-la">La&nbsp;Sala</span> <span class="bl-ia">de&nbsp;IA</span></span>
+      </div>
+      <div class="bl-tag"><span class="dot-pulse"></span> Primera Generación</div>
+    </div>
     <h1 class="hero-h1">
       <span class="h1-top">La IA no te va a reemplazar.</span>
       <span class="h1-hero">Te va a <em>multiplicar</em>.</span>
@@ -956,7 +984,13 @@
       </div>
       <div class="dep-top">
         <span class="dep-tag"><span class="dot-pulse"></span> Acceso anticipado</span>
-        <span class="dep-live"><span class="lv-dot"></span><b class="js-reserving">17</b> reservando ahora</span>
+      </div>
+      <div class="scarcity">
+        <span class="sc-dot"></span>
+        <div class="sc-body">
+          <div class="sc-main">Solo quedan <b class="js-seats-left">30</b> sillas</div>
+          <div class="sc-sub">Cuando se llenen las 75, se cierra la inscripción</div>
+        </div>
       </div>
 
       <div class="dep-price">
@@ -1303,7 +1337,13 @@
       </div>
       <div class="dep-top">
         <span class="dep-tag"><span class="dot-pulse"></span> Acceso anticipado</span>
-        <span class="dep-live"><b class="js-reserving">17</b> reservando ahora</span>
+      </div>
+      <div class="scarcity">
+        <span class="sc-dot"></span>
+        <div class="sc-body">
+          <div class="sc-main">Solo quedan <b class="js-seats-left">30</b> sillas</div>
+          <div class="sc-sub">Cuando se llenen las 75, se cierra la inscripción</div>
+        </div>
       </div>
       <div class="dep-price">
         <div class="dep-amount"><sup>$</sup>50<span>hoy</span></div>
@@ -1526,16 +1566,24 @@
   }
   tick(); setInterval(tick,1000);
 
-  // ---- "reservando ahora": 17 -> 65, sube progresivamente cada ~5s ----
-  var resEls=document.querySelectorAll('.js-reserving');
-  var res=17, CAP=65;
-  function bumpRes(){
-    if(res>=CAP) return;
-    res=Math.min(CAP, res + (Math.random()<0.25?2:1));
-    for(var i=0;i<resEls.length;i++) resEls[i].textContent=res;
-    if(res<CAP) setTimeout(bumpRes, 4500+Math.random()*1500);
+  // ============================================================
+  //  SILLAS DISPONIBLES  —  cambiar SEATS_LEFT cuando alguien compre.
+  //  Al llegar a 0, la inscripción se cierra sola.
+  // ============================================================
+  var SEATS_LEFT = 30;
+  var leftEls=document.querySelectorAll('.js-seats-left');
+  for(var i=0;i<leftEls.length;i++) leftEls[i].textContent=SEATS_LEFT;
+  if(SEATS_LEFT<=0){
+    document.querySelectorAll('.scarcity').forEach(function(s){
+      s.classList.add('sold-out');
+      var m=s.querySelector('.sc-main'), sub=s.querySelector('.sc-sub');
+      if(m) m.innerHTML='Inscripción <b>cerrada</b>';
+      if(sub) sub.textContent='Las 75 sillas están llenas';
+    });
+    document.querySelectorAll('.seat-btn').forEach(function(b){
+      b.classList.add('is-closed'); b.setAttribute('aria-disabled','true'); b.removeAttribute('href');
+    });
   }
-  if(resEls.length) setTimeout(bumpRes, 4500+Math.random()*1500);
 })();
 </script>
 </body>
