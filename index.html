@@ -102,6 +102,29 @@
   .sc-sub{font-size:11.5px;color:var(--muted);margin-top:2px}
   .scarcity.sold-out{background:rgba(255,255,255,.04);border-color:var(--border)} .scarcity.sold-out .sc-main{color:var(--muted)} .scarcity.sold-out .sc-main b{color:var(--danger)} .scarcity.sold-out .sc-dot{background:var(--danger);animation:none}
   .seat-btn.is-closed{filter:grayscale(1);opacity:.5;pointer-events:none;animation:none}
+  /* lista de espera (sold out) */
+  .waitlist{max-width:440px;margin:26px auto 0;background:linear-gradient(180deg,rgba(52,211,153,.06),rgba(255,255,255,.02));border:1px solid rgba(52,211,153,.3);border-radius:20px;padding:30px 26px;text-align:center}
+  .wl-badge{display:inline-block;font-size:10.5px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--warn);background:rgba(242,193,78,.12);border:1px solid rgba(242,193,78,.3);padding:5px 12px;border-radius:999px;margin-bottom:14px}
+  .waitlist h3{font-size:22px;line-height:1.15;margin-bottom:10px}
+  .waitlist h3 b{color:var(--green)}
+  .wl-sub{font-size:14px;color:var(--muted);line-height:1.55;margin:0 auto 20px;max-width:360px}
+  .wl-sub b{color:var(--text);font-weight:700}
+  .wl-form{display:flex;flex-direction:column;gap:10px;text-align:left}
+  .wl-form input{width:100%;background:rgba(0,0,0,.3);border:1px solid var(--border);border-radius:11px;padding:13px 15px;font-size:15px;color:var(--text);font-family:inherit;transition:border-color .2s,box-shadow .2s}
+  .wl-form input:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px rgba(34,197,94,.15)}
+  .wl-form input::placeholder{color:var(--muted)}
+  .wl-btn{margin-top:5px;background:linear-gradient(135deg,var(--green),var(--core));color:#04240f;font-weight:800;font-size:16px;padding:15px;border:none;border-radius:12px;cursor:pointer;transition:transform .12s,box-shadow .2s;box-shadow:0 8px 24px -10px rgba(34,197,94,.6)}
+  .wl-btn:hover{transform:translateY(-1px)}
+  .wl-btn:disabled{opacity:.6;cursor:default;transform:none}
+  .wl-err{font-size:12.5px;color:var(--danger);margin-top:10px;font-weight:600}
+  .wl-ok{display:none}
+  .wl-ok svg{width:44px;height:44px;color:var(--green);background:var(--green-soft);border-radius:50%;padding:10px;margin-bottom:12px}
+  .wl-ok h3{color:var(--green)}
+  .waitlist.done .wl-live{display:none} .waitlist.done .wl-ok{display:block}
+  /* mensaje que reemplaza el precio cuando está lleno */
+  .dep-sold-msg{text-align:center;padding:10px 0 4px}
+  .dsm-big{font-size:25px;font-weight:800;color:var(--green);letter-spacing:-.02em;line-height:1.15;margin-bottom:9px}
+  .dsm-sub{font-size:13.5px;color:var(--muted);line-height:1.55;max-width:330px;margin:0 auto}
   @media(prefers-reduced-motion:reduce){.sc-dot{animation:none}}
   /* countdown en la tarjeta de depósito */
   .dep-cd{margin-bottom:18px;padding-bottom:16px;border-bottom:1px solid var(--border)}
@@ -1027,6 +1050,26 @@
       </div>
     </div>
 
+    <div id="waitlist" class="waitlist reveal" hidden>
+      <div class="wl-live">
+        <div class="wl-badge">Cohort lleno</div>
+        <h3>El cohort de la <b>Gen 01</b> se llenó 🎉</h3>
+        <p class="wl-sub">Se agotaron las 75 sillas. Déjanos tus datos y te enviamos <b>más información</b> — y eres el <b>primero</b> en enterarte cuando abramos la próxima generación.</p>
+        <form class="wl-form" id="wlForm" novalidate>
+          <input type="text" name="nombre" placeholder="Tu nombre" required autocomplete="name">
+          <input type="email" name="email" placeholder="Tu email" required autocomplete="email">
+          <input type="tel" name="phone" placeholder="WhatsApp (opcional)" autocomplete="tel">
+          <button type="submit" class="wl-btn">Únete a la lista de espera</button>
+        </form>
+        <div class="wl-err" id="wlErr" hidden>Revisa tu nombre y un email válido.</div>
+      </div>
+      <div class="wl-ok">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>
+        <h3>¡Estás en la lista! ✅</h3>
+        <p class="wl-sub">Te avisamos de primero cuando abra la Gen 02. Revisa tu correo (y el spam, por si acaso).</p>
+      </div>
+    </div>
+
     <div class="trust reveal">
       <div class="t"><b>6</b> semanas en vivo</div>
       <div class="t">Empiezas desde <b>cero</b></div>
@@ -1570,18 +1613,49 @@
   //  SILLAS DISPONIBLES  —  cambiar SEATS_LEFT cuando alguien compre.
   //  Al llegar a 0, la inscripción se cierra sola.
   // ============================================================
-  var SEATS_LEFT = 1;
+  var SEATS_LEFT = 0;  // cohort lleno → estado agotado activo
+  // preview del estado con cupo: abrir con ?open=1
+  if(new URLSearchParams(location.search).get('open')==='1') SEATS_LEFT=1;
   var leftEls=document.querySelectorAll('.js-seats-left');
   for(var i=0;i<leftEls.length;i++) leftEls[i].textContent=SEATS_LEFT;
   if(SEATS_LEFT<=0){
-    document.querySelectorAll('.scarcity').forEach(function(s){
-      s.classList.add('sold-out');
-      var m=s.querySelector('.sc-main'), sub=s.querySelector('.sc-sub');
-      if(m) m.innerHTML='Inscripción <b>cerrada</b>';
-      if(sub) sub.textContent='Las 75 sillas están llenas';
+    // ocultar chip de escasez, precio y desglose; poner un mensaje
+    document.querySelectorAll('.scarcity').forEach(function(s){ s.style.display='none'; });
+    document.querySelectorAll('.deposit').forEach(function(card){
+      var price=card.querySelector('.dep-price');
+      if(price){
+        var msg=document.createElement('div');
+        msg.className='dep-sold-msg';
+        msg.innerHTML='<div class="dsm-big">El cohort se llenó 🎉</div><div class="dsm-sub">Las 75 sillas de la Gen 01 se agotaron. Déjanos tus datos y eres el primero en enterarte cuando abra la próxima generación.</div>';
+        price.parentNode.insertBefore(msg, price);
+      }
+      ['.dep-cd','.dep-price','.dep-ledger','.dep-finance','.dep-unlocks'].forEach(function(sel){
+        var el=card.querySelector(sel); if(el) el.style.display='none';
+      });
     });
+    // mostrar la lista de espera
+    var wl=document.getElementById('waitlist'); if(wl) wl.hidden=false;
+    // el botón de compra ahora lleva a dejar los datos
     document.querySelectorAll('.seat-btn').forEach(function(b){
-      b.classList.add('is-closed'); b.setAttribute('aria-disabled','true'); b.removeAttribute('href');
+      b.setAttribute('href','#waitlist');
+      b.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg> Cohort lleno · déjanos tus datos';
+    });
+  }
+
+  // ---- Envío del formulario de lista de espera al CRM de La Sala ----
+  var CRM_URL='https://script.google.com/macros/s/AKfycbx4lMpMjSD4aGnMNOdu3DwnnV8XITHB6t2smF7vh5KYa-OdztslQIxufsgmWrbaI32J/exec';
+  var wlForm=document.getElementById('wlForm');
+  if(wlForm){
+    wlForm.addEventListener('submit',function(e){
+      e.preventDefault();
+      var err=document.getElementById('wlErr');
+      var nombre=wlForm.nombre.value.trim(), email=wlForm.email.value.trim(), phone=wlForm.phone.value.trim();
+      if(!nombre || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){ if(err) err.hidden=false; return; }
+      if(err) err.hidden=true;
+      var btn=wlForm.querySelector('.wl-btn'); btn.disabled=true; btn.textContent='Enviando…';
+      fetch(CRM_URL,{method:'POST',mode:'no-cors',body:JSON.stringify({nombre:nombre,email:email,phone:phone,goal:'Lista de espera Gen 02'})})
+        .catch(function(){})
+        .finally(function(){ document.getElementById('waitlist').classList.add('done'); });
     });
   }
 })();
